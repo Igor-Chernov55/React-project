@@ -1,0 +1,14 @@
+.imageAvatar {
+    width: 70px;
+    height: 70px;
+    clip-path: circle(25%);
+}
+
+.postBlock {
+    display: flex;
+    align-items: center;
+}
+
+p {
+    margin: 0;
+}

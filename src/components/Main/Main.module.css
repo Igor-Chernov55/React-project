@@ -1,0 +1,16 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+    background-image: url("https://i.pinimg.com/originals/92/42/05/924205ea89862667d9de018b820019fd.jpg");
+    color: #fff;
+}
+
+.image {
+    width: 100%;
+    object-fit: contain;
+
+}

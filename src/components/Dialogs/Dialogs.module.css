@@ -1,0 +1,23 @@
+.Dialogs {
+    display: flex;
+}
+
+.dialogsBlock {
+    display: flex;
+}
+
+.dialogsItem {
+    margin: 0;
+    list-style-type: none;
+    padding-right: 30px;
+    border-right: 1px solid #000;
+}
+
+.dialogsLink {
+    margin-bottom: 10px;
+}
+
+.dialogsMessage {
+    display: flex;
+    padding-left: 30px;
+}

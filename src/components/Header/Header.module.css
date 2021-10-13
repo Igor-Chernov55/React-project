@@ -1,0 +1,26 @@
+.headerMain {
+    display: flex;
+    align-items: center;
+}
+
+.headerItem {
+    display: flex;
+    margin: 0;
+    list-style-type: none;
+
+}
+
+.headerItem__link {
+    margin-right: 10px;
+}
+
+.headerItem__href {
+    text-decoration: none;
+    color: #000;
+}
+
+.imageMain {
+    width: 80px;
+    object-fit: contain;
+
+}

@@ -1,0 +1,15 @@
+.Main {
+  display: flex;
+  overflow: hidden;
+}
+
+
+.Container {
+  margin: 0 auto;
+  max-width: 1140px;
+  width: 100%;
+}
+
+.ContentBlock {
+  display: flex;
+}
