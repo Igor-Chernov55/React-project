@@ -1,12 +1,11 @@
-import React, {createRef} from 'react'
+import React from 'react'
 import Post from './Posts/Posts'
 import classes from './Profile.module.css'
 import {PostsType} from "../../StateComponents/State";
-import {AddPost} from "../../StateComponents/State";
 
 type ProfileTypes = {
     posts: Array<PostsType>
-    addPropsCallback:(postText: string) => void
+    addProps:(postText: string) => void
 }
 
 const Profile = (props: ProfileTypes) => {
@@ -15,7 +14,7 @@ const Profile = (props: ProfileTypes) => {
 
     const AddPost = () => {
         if (NewPost.current) {
-            props.addPropsCallback(NewPost.current.value)
+            props.addProps(NewPost.current.value)
         }
     }
 

@@ -1,4 +1,3 @@
-
 export type DialogsType = {
     id: number
     name: string
@@ -71,7 +70,6 @@ export const State: RootStateType = {
          posts: [
              {id: 1, name: "post1", img: 'https://picsum.photos/200', likes: 1},
          ]
-
     }
     
 }

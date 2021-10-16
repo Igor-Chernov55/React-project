@@ -1,20 +1,21 @@
 import React from 'react'
-import {AddPost, PostsType} from '../StateComponents/State'
+import {PostsType} from '../StateComponents/State'
 import classes from './Main.module.css'
 import Profile from './Profile/Profile'
 
-type MainPropsType = {
+type MainPropsTypess = {
     posts: Array<PostsType>
-    addPropsCallback:(postText: string) => void
+    addPost: () => void
 }
 
-const Main: React.FC<MainPropsType> = (props) => {
+const Main: React.FC<MainPropsTypess> = (props) => {
 
     return (
         <main className={classes.container}>
-         <Profile posts={props.posts}  addPropsCallback={props.addPropsCallback}/>
+         <Profile posts={props.posts}  addProps={props.addPost} />
         </main>
     )
+
 }
 
 

@@ -4,13 +4,13 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
-import {State} from "./components/StateComponents/State";
+import {AddPost, State} from "./components/StateComponents/State";
 
 ReactDOM.render(
 
   <React.StrictMode>
       <BrowserRouter>
-          <App state={State}/>
+          <App state={State} addPropsCallback={AddPost}/>
       </BrowserRouter>
   </React.StrictMode>,
 
