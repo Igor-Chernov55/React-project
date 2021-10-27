@@ -1,11 +1,3 @@
-// let onChange = () => {
-//     console.log('some')
-// }
-//
-// export const subscribe = (callback: () => void) => {
-//     onChange = callback
-// }
-
 export type DialogsType = {
     id: number
     name: string
@@ -86,18 +78,6 @@ export const State: RootStateType = {
 
 }
 
-// export const AddPost = (postText: string) => {
-//     const newPost: PostsType = {
-//         id: new Date().getTime(),
-//         name: postText,
-//         img: 'string',
-//         likes: 0,
-//     }
-//
-//     State.dialogsPage.posts.push(newPost)
-//     this.onChange()
-// }
-
 export type StoreType = {
     _State: RootStateType
     addNewPost: (newText: string) => void
@@ -105,7 +85,37 @@ export type StoreType = {
     onChange: () => void
     subscribe:(callback: () => void) => void
     getState: () => RootStateType
+    dispatch: (action: ActionType) => void
 }
+
+type AddPostActionType = {
+    type: 'ADD-POST'
+    postText: string
+}
+
+type ChangeNewTextActionType = {
+    type: 'CHANGE-NEW-TEXT'
+    newText: string
+}
+
+export type ActionType = AddPostActionType | ChangeNewTextActionType
+
+export const addPostAC = (postText: string):AddPostActionType  => {
+  return {
+      type: "ADD-POST",
+      postText: postText
+  }
+}
+
+export const ChangePostAC = (newText: string):ChangeNewTextActionType  => {
+  return {
+      type: "CHANGE-NEW-TEXT",
+      newText: newText
+  }
+}
+
+
+
 
 const store: StoreType = {
     _State: {
@@ -142,6 +152,7 @@ const store: StoreType = {
                 {id: 1, name: "post1", img: 'https://picsum.photos/200', likes: 1},
             ]
         }
+
     },
     addNewPost(newText: string) {
         this._State.dialogsPage.newPostMessage = newText
@@ -155,7 +166,7 @@ const store: StoreType = {
             likes: 0,
         }
 
-        State.dialogsPage.posts.push(newPost)
+        this._State.dialogsPage.posts.push(newPost)
         this.onChange()
     },
     onChange() {
@@ -166,8 +177,23 @@ const store: StoreType = {
     },
     getState() {
         return this._State
+    },
+    dispatch(action) {
+        if (action.type === 'ADD-POST') {
+            const newPost: PostsType = {
+                id: new Date().getTime(),
+                name: action.postText,
+                img: 'string',
+                likes: 0,
+            }
+            this._State.dialogsPage.posts.push(newPost)
+            this.onChange()
+        }
+        else if (action.type === 'CHANGE-NEW-TEXT') {
+            this._State.dialogsPage.newPostMessage = action.newText
+            this.onChange()
+        }
     }
-
 }
 
 export default store

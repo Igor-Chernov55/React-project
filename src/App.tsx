@@ -6,12 +6,13 @@ import Main from './components/Main/Main';
 import Footer from './components/Footer/Footer';
 import {Route, Switch} from 'react-router-dom';
 import Dialogs from "./components/Dialogs/Dialogs";
-import {StoreType} from "./components/StateComponents/State";
+import {ActionType, StoreType} from "./components/StateComponents/State";
 
 type RootStatesType = {
     store: StoreType
     addPropsCallback: (postText: string) => void
     addNewPosts: (NewText: string) => void
+    dispatch: (action: ActionType) => void
 }
 
 function App(props: RootStatesType ) {
@@ -20,12 +21,12 @@ function App(props: RootStatesType ) {
         <Switch>
             <div className={classes.Main}>
                 <div className={classes.Container}>
-                    <Header header={props.state.dialogsPage.header}/>
+                    <Header header={state.dialogsPage.header}/>
                     <div className={classes.ContentBlock}>
-                        <Sider siderMenu={props.state.dialogsPage.siderMenu}/>
+                        <Sider siderMenu={state.dialogsPage.siderMenu}/>
 
-                        <Route exact path={['/', '/profile']} render={() => <Main addNewPost={props.addNewPosts} addPost={props.addPropsCallback} message={props.state.dialogsPage.newPostMessage} posts={props.state.dialogsPage.posts} />}/>
-                        <Route exact path='/dialogs' render={() => <Dialogs dialogs={props.state.dialogsPage.dialogs} message={props.state.dialogsPage.message}/>}/>
+                        <Route exact path={['/', '/profile']} render={() => <Main addNewPost={props.store.addNewPost.bind(props.store)} dispatch={props.dispatch}  addPost={props.store.AddPost.bind(props.store)} message={state.dialogsPage.newPostMessage} posts={state.dialogsPage.posts} />}/>
+                        <Route exact path='/dialogs' render={() => <Dialogs dialogs={state.dialogsPage.dialogs} message={state.dialogsPage.message}/>}/>
 
                     </div>
                     <Footer/>

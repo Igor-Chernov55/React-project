@@ -1,10 +1,13 @@
 import React from 'react';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import {subscribe} from "./components/StateComponents/State";
-import {renderTree} from "./render";
 
-subscribe(renderTree)
+import {renderTree} from "./render";
+import store from "./components/StateComponents/State";
+
+store.subscribe(renderTree)
+
+renderTree()
 
 
 // If you want to start measuring performance in your app, pass a function
