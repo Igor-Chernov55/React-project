@@ -1,3 +1,6 @@
+import {ActionsMessageReducerType, messageReducer} from "./MessageReducer";
+import {ActionsPostsReducerType, postsReducer} from "./PostsReducer";
+
 export type DialogsType = {
     id: number
     name: string
@@ -28,119 +31,64 @@ export type siderMenuType = {
 
 export type DialogsPageType = {
     dialogs: Array<DialogsType>
-    message: Array<MessageType>
-    header: Array<HeaderType>
-    siderMenu: Array<siderMenuType>
-    posts: Array<PostsType>
+    newMessage: string
+}
+
+export type ProfilePageType = {
     newPostMessage: string
+    message: Array<MessageType>
+    posts: Array<PostsType>
+}
+
+export type SideBarType = {
+    siderMenu: Array<siderMenuType>
+}
+
+export type HeaderTopMenuType = {
+    header: Array<HeaderType>
 }
 
 export type RootStateType = {
     dialogsPage: DialogsPageType
-}
-
-
-export const State: RootStateType = {
-
-
-    dialogsPage: {
-        newPostMessage: 'some',
-        dialogs: [
-            {id: 1, name: 'Pasha'},
-            {id: 2, name: 'Masha'},
-            {id: 3, name: 'Dima'},
-            {id: 4, name: 'Sasha'},
-        ],
-
-        message: [
-            {id: 1, img: 'src', message: 'text1'},
-            {id: 2, img: 'src', message: 'text2'},
-            {id: 3, img: 'src', message: 'text3'}
-        ],
-
-        header: [
-            {id: 1, name: 'About us'},
-            {id: 2, name: 'Contacts'},
-            {id: 3, name: 'Map'}
-        ],
-
-        siderMenu: [
-            {id: 1, name: 'Profile'},
-            {id: 2, name: 'Dialogs'},
-            {id: 3, name: 'Message'},
-            {id: 4, name: 'News'},
-            {id: 5, name: 'Music'},
-        ],
-        posts: [
-            {id: 1, name: "post1", img: 'https://picsum.photos/200', likes: 1},
-        ]
-    }
-
+    profilePage: ProfilePageType
+    sideBar: SideBarType
+    headerTopMenu: HeaderTopMenuType
 }
 
 export type StoreType = {
     _State: RootStateType
-    addNewPost: (newText: string) => void
-    AddPost: (postText: string) => void
-    onChange: () => void
-    subscribe:(callback: () => void) => void
+    onChange: (cb: any) => void
+    subscribe: (callback: () => void) => void
     getState: () => RootStateType
     dispatch: (action: ActionType) => void
 }
 
-type AddPostActionType = {
-    type: 'ADD-POST'
-    postText: string
-}
-
-type ChangeNewTextActionType = {
-    type: 'CHANGE-NEW-TEXT'
-    newText: string
-}
-
-export type ActionType = AddPostActionType | ChangeNewTextActionType
-
-export const addPostAC = (postText: string):AddPostActionType  => {
-  return {
-      type: "ADD-POST",
-      postText: postText
-  }
-}
-
-export const ChangePostAC = (newText: string):ChangeNewTextActionType  => {
-  return {
-      type: "CHANGE-NEW-TEXT",
-      newText: newText
-  }
-}
+export type ActionType = ActionsPostsReducerType | ActionsMessageReducerType
 
 
-
-
-const store: StoreType = {
+export const store: StoreType = {
     _State: {
-
         dialogsPage: {
-            newPostMessage: 'some',
+            newMessage: '',
             dialogs: [
                 {id: 1, name: 'Pasha'},
                 {id: 2, name: 'Masha'},
                 {id: 3, name: 'Dima'},
                 {id: 4, name: 'Sasha'},
             ],
-
+        },
+        profilePage: {
+            newPostMessage: '',
             message: [
                 {id: 1, img: 'src', message: 'text1'},
                 {id: 2, img: 'src', message: 'text2'},
                 {id: 3, img: 'src', message: 'text3'}
             ],
-
-            header: [
-                {id: 1, name: 'About us'},
-                {id: 2, name: 'Contacts'},
-                {id: 3, name: 'Map'}
-            ],
-
+            posts: [
+                {id: 1, name: "post1", img: 'https://picsum.photos/200', likes: 1},
+            ]
+        },
+        sideBar: {
             siderMenu: [
                 {id: 1, name: 'Profile'},
                 {id: 2, name: 'Dialogs'},
@@ -148,51 +96,62 @@ const store: StoreType = {
                 {id: 4, name: 'News'},
                 {id: 5, name: 'Music'},
             ],
-            posts: [
-                {id: 1, name: "post1", img: 'https://picsum.photos/200', likes: 1},
-            ]
+        },
+        headerTopMenu: {
+            header: [
+                {id: 1, name: 'About us'},
+                {id: 2, name: 'Contacts'},
+                {id: 3, name: 'Map'}
+            ],
         }
 
-    },
-    addNewPost(newText: string) {
-        this._State.dialogsPage.newPostMessage = newText
-        this.onChange()
-    },
-    AddPost(postText: string) {
-        const newPost: PostsType = {
-            id: new Date().getTime(),
-            name: postText,
-            img: 'string',
-            likes: 0,
-        }
-
-        this._State.dialogsPage.posts.push(newPost)
-        this.onChange()
     },
     onChange() {
         console.log('state Changed ')
     },
-    subscribe(callback: () => void){
+    subscribe(callback: any) {
         this.onChange = callback
     },
     getState() {
         return this._State
     },
-    dispatch(action) {
-        if (action.type === 'ADD-POST') {
-            const newPost: PostsType = {
-                id: new Date().getTime(),
-                name: action.postText,
-                img: 'string',
-                likes: 0,
-            }
-            this._State.dialogsPage.posts.push(newPost)
-            this.onChange()
-        }
-        else if (action.type === 'CHANGE-NEW-TEXT') {
-            this._State.dialogsPage.newPostMessage = action.newText
-            this.onChange()
-        }
+    dispatch(action: ActionType) {
+
+       postsReducer(this._State.profilePage, action)
+        messageReducer(this._State.dialogsPage, action)
+        
+        this.onChange(this._State)
+
+        //
+        // if (action.type === 'CHANGE-MESSAGE') {
+        //     this._State.dialogsPage.newMessage = action.message
+        //     this.onChange(this._State)
+        // } else if (action.type === 'ADD-MESSAGE') {
+        //     const newMessage: DialogsType = {
+        //         id: new Date().getTime(),
+        //         name: this._State.dialogsPage.newMessage
+        //     }
+        //
+        //     this._State.dialogsPage.dialogs.push(newMessage)
+        //     this.onChange(this._State)
+        // }
+        //
+        // else if (action.type === 'CHANGE-POST') {
+        //     this._State.profilePage.newPostMessage = action.post
+        //     this.onChange(this._State)
+        // }
+        //
+        // else if (action.type === 'ADD-POST') {
+        //     const newPost: PostsType = {
+        //         id: new Date().getTime(),
+        //         img: 'https://avavatar.ru/images/avatars/1/avatar_jV2wd3K7Xo6YegC2.jpg',
+        //         name: this._State.dialogsPage.newMessage,
+        //         likes: 2
+        //     }
+        //
+        //     this._State.profilePage.posts.push(newPost)
+        //     this.onChange(this._State)
+        // }
     }
 }
 
