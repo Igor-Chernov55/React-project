@@ -1,24 +1,22 @@
-import React, {ChangeEvent} from 'react'
+import React, {ChangeEvent, Dispatch} from 'react'
 import Post from './Posts/Posts'
 import classes from './Profile.module.css'
-import {ActionType, addPostAC, PostsType} from "../../StateComponents/State";
+import {ActionType, PostsType} from "../../StateComponents/State";
+import {ActionsPostsReducerType, addPostAC, changePostAC} from "../../StateComponents/PostsReducer";
 
 type ProfileTypes = {
     message: string
     posts: Array<PostsType>
-    addProps:(postText: string) => void
-    newPostMessage: (newText: string) => void
-    dispatch: (action: ActionType) => void
+    dispatch: Dispatch<ActionType>
 }
 
 const Profile = (props: ProfileTypes) => {
-
-    const AddPost = () => {
-        props.dispatch(addPostAC(props.message))
+    const addPost = () => {
+        props.dispatch(addPostAC())
     }
 
-    const newPostMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.newPostMessage(e.currentTarget.value)
+    const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        props.dispatch(changePostAC(e.currentTarget.value))
     }
 
     return (
@@ -29,8 +27,11 @@ const Profile = (props: ProfileTypes) => {
 
             <div>
                 My posts
-                <div><textarea value={props.message} onChange={newPostMessage} name="textPost" /><button onClick={AddPost}>опубликовать</button></div>
-                {props.posts.map( p => <Post key={p.id} id={p.id} name={p.name} img={p.img} likes={p.likes} />)}
+                <div>
+                    <textarea value={props.message} onChange={onChange} name="textPost"/>
+                    <button onClick={addPost}>опубликовать</button>
+                </div>
+                {props.posts.map(p => <Post key={p.id} id={p.id} name={p.name} img={p.img} likes={p.likes}/>)}
             </div>
         </>
     )

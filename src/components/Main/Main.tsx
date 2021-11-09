@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Dispatch} from 'react'
 import {ActionType, PostsType} from '../StateComponents/State'
 import classes from './Main.module.css'
 import Profile from './Profile/Profile'
@@ -6,20 +6,20 @@ import Profile from './Profile/Profile'
 type MainPropsTypess = {
     message: string
     posts: Array<PostsType>
-    addPost: (postText: string) => void
-    addNewPost: (newText: string) => void
-    dispatch: (action: ActionType) => void
+    dispatch: Dispatch<ActionType>
 }
 
-const Main: React.FC<MainPropsTypess> = (props) => {
+const Main: React.FC<MainPropsTypess> = (props: MainPropsTypess) => {
 
     return (
         <main className={classes.container}>
-         <Profile posts={props.posts} message={props.message} dispatch={props.dispatch} newPostMessage={props.addNewPost} addProps={props.addPost} />
+            <Profile
+                posts={props.posts}
+                message={props.message}
+                dispatch={props.dispatch}
+            />
         </main>
     )
-
 }
-
 
 export default Main
