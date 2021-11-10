@@ -18,7 +18,6 @@ export const changeMessageAC = (message: string) => {
     } as const
 }
 
-
 export const messageReducer = (state: DialogsPageType, action: ActionType) => {
     switch (action.type) {
         case 'ADD-MESSAGE' :

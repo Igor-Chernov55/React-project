@@ -18,6 +18,9 @@ export const renderTree = (state: RootStateType) => {
 
 renderTree(store.getState())
 // @ts-ignore
-store.subscribe(renderTree)
+store.subscribe(() => {
+    let state = store.getState();
+    renderTree(state)
+} )
 
 reportWebVitals();

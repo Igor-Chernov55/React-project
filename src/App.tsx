@@ -5,7 +5,6 @@ import Sider from './components/Sider/Sider';
 import Main from './components/Main/Main';
 import Footer from './components/Footer/Footer';
 import {Route, Switch} from 'react-router-dom';
-import Dialogs from "./components/Dialogs/Dialogs";
 import {
     ActionType,
     DialogsPageType,
@@ -13,8 +12,9 @@ import {
     ProfilePageType,
     SideBarType
 } from "./components/StateComponents/State";
-import {ActionsPostsReducerType} from "./components/StateComponents/PostsReducer";
-import {ActionsMessageReducerType} from "./components/StateComponents/MessageReducer";
+
+
+import ProfileContainer from "./components/Main/Profile/Posts/ProfileContainer";
 
 type RootStatesType = {
     dialogsPage: DialogsPageType
@@ -44,7 +44,7 @@ function App(props: RootStatesType) {
                         }}/>
                         <Route exact path='/dialogs' render={() => {
                             return (
-                                <Dialogs
+                                <ProfileContainer
                                     dispatch={props.dispatch}
                                     newMessage={props.profilePage.newPostMessage}
                                     dialogs={props.dialogsPage.dialogs}
@@ -52,7 +52,6 @@ function App(props: RootStatesType) {
                                 />
                             )
                         }}/>
-
                     </div>
                     <Footer/>
                 </div>

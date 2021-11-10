@@ -8,14 +8,14 @@ export type ActionsPostsReducerType =
 export const addPostAC = () => {
     return {
         type: 'ADD-POST'
-    }as const
+    } as const
 }
 
 export const changePostAC = (post: string) => {
     return {
         type: 'CHANGE-POST',
         post
-    }as const
+    } as const
 }
 
 export const postsReducer = (state: ProfilePageType, action: ActionType): ProfilePageType => {
