@@ -1,7 +1,7 @@
 import React, {Dispatch} from 'react'
 import {ActionType, PostsType} from '../StateComponents/State'
 import classes from './Main.module.css'
-import Profile from './Profile/Profile'
+import ProfileContainer from "./Profile/ProfileContainer";
 
 type MainPropsTypess = {
     message: string
@@ -13,7 +13,7 @@ const Main: React.FC<MainPropsTypess> = (props: MainPropsTypess) => {
 
     return (
         <main className={classes.container}>
-            <Profile
+            <ProfileContainer
                 posts={props.posts}
                 message={props.message}
                 dispatch={props.dispatch}

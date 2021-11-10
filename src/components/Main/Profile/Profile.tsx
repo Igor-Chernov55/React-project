@@ -1,22 +1,23 @@
-import React, {ChangeEvent, Dispatch} from 'react'
+import React, {ChangeEvent} from 'react'
 import Post from './Posts/Posts'
 import classes from './Profile.module.css'
-import {ActionType, PostsType} from "../../StateComponents/State";
-import {ActionsPostsReducerType, addPostAC, changePostAC} from "../../StateComponents/PostsReducer";
+import {PostsType} from "../../StateComponents/State";
 
 type ProfileTypes = {
     message: string
     posts: Array<PostsType>
-    dispatch: Dispatch<ActionType>
+    addPost: () => void
+    onChange: (text: string) => void
 }
 
 const Profile = (props: ProfileTypes) => {
+
     const addPost = () => {
-        props.dispatch(addPostAC())
+        props.addPost()
     }
 
     const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(changePostAC(e.currentTarget.value))
+        props.onChange(e.currentTarget.value)
     }
 
     return (
