@@ -10,7 +10,7 @@ type ProfileTypes = {
     dispatch: Dispatch<ActionsPostsReducerType>
 }
 
-const ProfileContainer = (props: ProfileTypes) => {
+const DialogsContainer = (props: ProfileTypes) => {
 
     const addPost = () => {
         props.dispatch(addPostAC())
@@ -31,4 +31,4 @@ const ProfileContainer = (props: ProfileTypes) => {
     )
 }
 
-export default ProfileContainer
+export default DialogsContainer

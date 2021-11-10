@@ -14,7 +14,7 @@ import {
 } from "./components/StateComponents/State";
 
 
-import ProfileContainer from "./components/Main/Profile/Posts/ProfileContainer";
+import DialogsContainer from "./components/Main/Profile/Posts/DialogsContainer";
 
 type RootStatesType = {
     dialogsPage: DialogsPageType
@@ -44,7 +44,7 @@ function App(props: RootStatesType) {
                         }}/>
                         <Route exact path='/dialogs' render={() => {
                             return (
-                                <ProfileContainer
+                                <DialogsContainer
                                     dispatch={props.dispatch}
                                     newMessage={props.profilePage.newPostMessage}
                                     dialogs={props.dialogsPage.dialogs}

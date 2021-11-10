@@ -14,7 +14,6 @@ type DialogsPageTypes = {
 
 const Dialogs: React.FC<DialogsPageTypes> = (props: DialogsPageTypes) => {
 
-    //test comment
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         props.onChange(e.currentTarget.value);
     }
