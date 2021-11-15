@@ -1,34 +1,39 @@
-import React, {Dispatch} from 'react'
+import React from 'react'
 import Dialogs from "../../../Dialogs/Dialogs";
-import {DialogsType, MessageType} from "../../../StateComponents/State";
-import {ActionsPostsReducerType, addPostAC, changePostAC} from "../../../StateComponents/PostsReducer";
+import {AppStateType} from "../../../StateComponents/redux-store";
+import {addMessageAC, changeMessageAC, InitialTypeDialogs} from "../../../StateComponents/MessageReducer";
+import {connect} from "react-redux";
+import {Dispatch} from "redux";
 
-type ProfileTypes = {
-    newMessage: string
-    dialogs: Array<DialogsType>
-    message: Array<MessageType>
-    dispatch: Dispatch<ActionsPostsReducerType>
+type MapStateDialogsType = {
+    dialogsPage: InitialTypeDialogs
 }
 
-const DialogsContainer = (props: ProfileTypes) => {
-
-    const addPost = () => {
-        props.dispatch(addPostAC())
-    }
-
-    const onChange = (text: string) => {
-        props.dispatch(changePostAC(text))
-    }
-
-    return (
-        <Dialogs
-            dialogs={props.dialogs}
-            newMessage={props.newMessage}
-            message={props.message}
-            addPost={addPost}
-            onChange={onChange}
-        />
-    )
+type MapDispathDialogsType = {
+    addMessage: () => void
+    onChangeMessage: (message: string) => void
 }
+
+export type DialogsPropsType = MapStateDialogsType & MapDispathDialogsType
+
+const mapStateDialogs = (state: AppStateType): MapStateDialogsType  => {
+    return {
+        dialogsPage: state.dialogsPage
+    }
+}
+
+const mapDispathDialogs = (dispath: Dispatch):MapDispathDialogsType  => {
+    return {
+        addMessage: () => {
+            dispath(addMessageAC())
+        },
+        onChangeMessage: (message: string) => {
+            dispath(changeMessageAC(message))
+        }
+    }
+}
+
+
+export const DialogsContainer = connect(mapStateDialogs,mapDispathDialogs) (Dialogs)
 
 export default DialogsContainer

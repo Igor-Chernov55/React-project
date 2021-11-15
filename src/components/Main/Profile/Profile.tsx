@@ -1,23 +1,17 @@
 import React, {ChangeEvent} from 'react'
 import Post from './Posts/Posts'
 import classes from './Profile.module.css'
-import {PostsType} from "../../StateComponents/State";
+import {ProfileTypes} from "./ProfileContainer";
 
-type ProfileTypes = {
-    message: string
-    posts: Array<PostsType>
-    addPost: () => void
-    onChange: (text: string) => void
-}
 
-const Profile = (props: ProfileTypes) => {
+export const Profile = (props: ProfileTypes) => {
 
     const addPost = () => {
         props.addPost()
     }
 
     const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.onChange(e.currentTarget.value)
+        props.onChangePost(e.currentTarget.value)
     }
 
     return (
@@ -29,13 +23,12 @@ const Profile = (props: ProfileTypes) => {
             <div>
                 My posts
                 <div>
-                    <textarea value={props.message} onChange={onChange} name="textPost"/>
+                    <textarea value={props.profilePage.newPostMessage} onChange={onChange} name="textPost"/>
                     <button onClick={addPost}>опубликовать</button>
                 </div>
-                {props.posts.map(p => <Post key={p.id} id={p.id} name={p.name} img={p.img} likes={p.likes}/>)}
+                {props.profilePage.posts.map(p => <Post key={p.id} id={p.id} name={p.name} img={p.img} likes={p.likes}/>)}
             </div>
         </>
     )
 }
 
-export default Profile

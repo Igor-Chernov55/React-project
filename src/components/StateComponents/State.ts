@@ -1,5 +1,5 @@
-import {ActionsMessageReducerType, messageReducer} from "./MessageReducer";
-import {ActionsPostsReducerType, postsReducer} from "./PostsReducer";
+import {ActionsMessageReducerType} from "./MessageReducer";
+import {ActionsPostsReducerType, postsProfileReducer} from "./PostsProfileReducer";
 
 export type DialogsType = {
     id: number
@@ -117,41 +117,11 @@ export const store: StoreType = {
     },
     dispatch(action: ActionType) {
 
-       postsReducer(this._State.profilePage, action)
-        messageReducer(this._State.dialogsPage, action)
+       postsProfileReducer(this._State.profilePage, action)
+        // messageReducer(this._State.dialogsPage, action)
         
         this.onChange(this._State)
 
-        //
-        // if (action.type === 'CHANGE-MESSAGE') {
-        //     this._State.dialogsPage.newMessage = action.message
-        //     this.onChange(this._State)
-        // } else if (action.type === 'ADD-MESSAGE') {
-        //     const newMessage: DialogsType = {
-        //         id: new Date().getTime(),
-        //         name: this._State.dialogsPage.newMessage
-        //     }
-        //
-        //     this._State.dialogsPage.dialogs.push(newMessage)
-        //     this.onChange(this._State)
-        // }
-        //
-        // else if (action.type === 'CHANGE-POST') {
-        //     this._State.profilePage.newPostMessage = action.post
-        //     this.onChange(this._State)
-        // }
-        //
-        // else if (action.type === 'ADD-POST') {
-        //     const newPost: PostsType = {
-        //         id: new Date().getTime(),
-        //         img: 'https://avavatar.ru/images/avatars/1/avatar_jV2wd3K7Xo6YegC2.jpg',
-        //         name: this._State.dialogsPage.newMessage,
-        //         likes: 2
-        //     }
-        //
-        //     this._State.profilePage.posts.push(newPost)
-        //     this.onChange(this._State)
-        // }
     }
 }
 

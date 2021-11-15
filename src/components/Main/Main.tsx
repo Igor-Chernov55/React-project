@@ -14,9 +14,9 @@ const Main: React.FC<MainPropsTypess> = (props: MainPropsTypess) => {
     return (
         <main className={classes.container}>
             <ProfileContainer
-                posts={props.posts}
-                message={props.message}
-                dispatch={props.dispatch}
+                // posts={props.posts}
+                // message={props.message}
+                // dispatch={props.dispatch}
             />
         </main>
     )

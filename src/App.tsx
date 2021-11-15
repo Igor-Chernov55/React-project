@@ -2,7 +2,6 @@ import React, {Dispatch} from 'react';
 import classes from './App.module.css';
 import Header from './components/Header/Header';
 import Sider from './components/Sider/Sider';
-import Main from './components/Main/Main';
 import Footer from './components/Footer/Footer';
 import {Route, Switch} from 'react-router-dom';
 import {
@@ -15,6 +14,7 @@ import {
 
 
 import DialogsContainer from "./components/Main/Profile/Posts/DialogsContainer";
+import ProfileContainer from "./components/Main/Profile/ProfileContainer";
 
 type RootStatesType = {
     dialogsPage: DialogsPageType
@@ -35,21 +35,13 @@ function App(props: RootStatesType) {
 
                         <Route exact path={['/', '/profile']} render={() => {
                             return (
-                                <Main
-                                    dispatch={props.dispatch}
-                                    message={props.dialogsPage.newMessage}
-                                    posts={props.profilePage.posts}
-                                />
+                                <ProfileContainer />
                             )
                         }}/>
                         <Route exact path='/dialogs' render={() => {
                             return (
-                                <DialogsContainer
-                                    dispatch={props.dispatch}
-                                    newMessage={props.profilePage.newPostMessage}
-                                    dialogs={props.dialogsPage.dialogs}
-                                    message={props.profilePage.message}
-                                />
+                                <DialogsContainer />
+
                             )
                         }}/>
                     </div>

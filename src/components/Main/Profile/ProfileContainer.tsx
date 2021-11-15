@@ -1,30 +1,40 @@
-import React, {Dispatch} from 'react'
-import {ActionType, PostsType} from "../../StateComponents/State";
-import {addPostAC, changePostAC} from "../../StateComponents/PostsReducer";
-import Profile from "./Profile";
+import React from 'react'
+import {addPostAC, changePostAC, InitialStateType} from "../../StateComponents/PostsProfileReducer";
+import {connect} from "react-redux";
+import {AppStateType} from "../../StateComponents/redux-store";
+import {Dispatch} from "redux";
+import {Profile} from "./Profile";
 
-type ProfileTypes = {
-    message: string
-    posts: Array<PostsType>
-    dispatch: Dispatch<ActionType>
+type MapStateProfileType = {
+    profilePage: InitialStateType
 }
 
-const ProfileContainer = (props: ProfileTypes) => {
-    const addPost = () => {
-        props.dispatch(addPostAC())
-    }
-
-    const onChange = (text: string) => {
-        props.dispatch(changePostAC(text))
-    }
-
-    return (
-        <Profile message={props.message}
-                 posts={props.posts}
-                 addPost={addPost}
-                 onChange={onChange}
-        />
-    )
+type MapDispathProfile = {
+    addPost : () => void
+    onChangePost: (text: string) => void
 }
+
+export type ProfileTypes = MapStateProfileType & MapDispathProfile
+
+
+const mapStateProfile = (state : AppStateType): MapStateProfileType  => {
+    return {
+        profilePage: state.profilePage
+    }
+}
+const mapDispathProfile = (dispath: Dispatch): MapDispathProfile => {
+    return {
+        addPost : () => {
+            dispath(addPostAC())
+        },
+
+        onChangePost: (text: string) => {
+            dispath(changePostAC(text))
+        },
+
+    }
+}
+
+export const ProfileContainer = connect(mapStateProfile,mapDispathProfile) (Profile)
 
 export default ProfileContainer

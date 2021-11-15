@@ -1,4 +1,54 @@
-import {ActionType, DialogsPageType, DialogsType} from "./State";
+import {ActionType, } from "./State";
+
+export type DialogsType = {
+    id: number
+    name: string
+}
+
+export type MessageType = {
+    id: number
+    img: string
+    message: string
+}
+
+const initialState: InitialTypeDialogs = {
+    dialogs: [],
+    message: [],
+    newMessage: ''
+}
+
+export type InitialTypeDialogs = {
+    dialogs: Array<DialogsType>
+    message: Array<MessageType>
+    newMessage: string
+}
+
+
+export const messageReducer = (state: InitialTypeDialogs = initialState, action: ActionType): InitialTypeDialogs => {
+
+    let stateCopy = {...state}
+
+    switch (action.type) {
+        case 'ADD-MESSAGE' :
+
+
+            const newMessage: DialogsType = {
+                    id: new Date().getTime(),
+                    name: stateCopy.newMessage
+            }
+
+            stateCopy.dialogs.push(newMessage)
+                return stateCopy
+
+        case 'CHANGE-MESSAGE' :
+
+            stateCopy.newMessage = action.message
+
+            return stateCopy
+
+        default: return stateCopy
+        }
+    }
 
 
 export type ActionsMessageReducerType =
@@ -14,42 +64,6 @@ export const addMessageAC = () => {
 
 export const changeMessageAC = (message: string) => {
     return {
-        type: 'CHANGE-MESSAGE', message:message
+        type: 'CHANGE-MESSAGE', message
     } as const
 }
-
-export const messageReducer = (state: DialogsPageType, action: ActionType) => {
-    switch (action.type) {
-        case 'ADD-MESSAGE' :
-            const newMessage: DialogsType = {
-                    id: new Date().getTime(),
-                    name: state.newMessage
-            }
-
-                    state.dialogs.push(newMessage)
-                return state
-
-        case 'CHANGE-MESSAGE' :
-
-            state.newMessage = action.message
-
-            return state
-
-        default: return state
-        }
-    }
-
-
-// if (action.type === 'CHANGE-MESSAGE') {
-//     this._State.dialogsPage.newMessage = action.message
-//     this.onChange(this._State)
-// } else if (action.type === 'ADD-MESSAGE') {
-//     const newMessage: MessageType = {
-//         id: new Date().getTime(),
-//         img: '',
-//         message: this._State.dialogsPage.newMessage
-//     }
-//
-//     this._State.dialogsPage.message.push(newMessage)
-//     this.onChange(this._State)
-// }
