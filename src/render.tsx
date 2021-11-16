@@ -1,7 +1,7 @@
 export const q = () => {}
 
 // import React from 'react';
-// import store from "./components/StateComponents/State";
+// import store from "./components/Redux/State";
 // import ReactDOM from "react-dom";
 // import {BrowserRouter} from "react-router-dom";
 // import App from "./App";

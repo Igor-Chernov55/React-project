@@ -1,7 +1,7 @@
 import React from 'react'
 import {NavLink} from 'react-router-dom'
 import classes from './Header.module.css'
-import {HeaderType} from "../StateComponents/State";
+import {HeaderType} from "../Redux/State";
 import {NavMenu} from "./NavMenu/NavMenu";
 
 export type DialogPageTypes = {

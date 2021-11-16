@@ -10,11 +10,12 @@ import {
     HeaderTopMenuType,
     ProfilePageType,
     SideBarType
-} from "./components/StateComponents/State";
+} from "./components/Redux/State";
 
 
-import DialogsContainer from "./components/Main/Profile/Posts/DialogsContainer";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import ProfileContainer from "./components/Main/Profile/ProfileContainer";
+import Users from "./components/Users/Users";
 
 type RootStatesType = {
     dialogsPage: DialogsPageType
@@ -44,6 +45,11 @@ function App(props: RootStatesType) {
 
                             )
                         }}/>
+                        <Route exact path='/users' render = {() => {
+                            return (
+                                <Users />
+                            )
+                        }} />
                     </div>
                     <Footer/>
                 </div>

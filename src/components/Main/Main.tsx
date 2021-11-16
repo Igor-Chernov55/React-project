@@ -1,5 +1,5 @@
 import React, {Dispatch} from 'react'
-import {ActionType, PostsType} from '../StateComponents/State'
+import {ActionType, PostsType} from '../Redux/State'
 import classes from './Main.module.css'
 import ProfileContainer from "./Profile/ProfileContainer";
 

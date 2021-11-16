@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import classes from './Sider.module.css'
-import {siderMenuType} from "../StateComponents/State";
+import {siderMenuType} from "../Redux/State";
 
 type SidersMenyTypes = {
     siderMenu: Array<siderMenuType>
