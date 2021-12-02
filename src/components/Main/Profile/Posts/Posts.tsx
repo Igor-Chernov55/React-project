@@ -14,11 +14,12 @@ const Post = (props: PostsType) => {
     return (
     <>
         <div>
-            <p>{props.name}</p>
+            <p>User</p>
 
-            <div className={classes.postBlock}><img className={classes.imageAvatar}
+            <div className={classes.postBlock}>
+                <img className={classes.imageAvatar}
                     src={props.img}/>
-                <p>text post</p></div>
+                <p>{props.name}</p></div>
             <span>likes {props.likes}</span>
         </div>
     </>

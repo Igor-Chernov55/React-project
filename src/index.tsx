@@ -19,7 +19,6 @@ export const renderTree = (state: RootStateType) => {
         document.getElementById('root')
     );
 }
-
 renderTree(store.getState())
 // @ts-ignore
 store.subscribe(() => {

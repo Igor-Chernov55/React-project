@@ -1,23 +1,5 @@
 import {ActionType} from "./State";
 
-export type ActionsPostsReducerType =
-    | ReturnType<typeof changePostAC>
-    | ReturnType<typeof addPostAC>
-
-
-export const addPostAC = () => {
-    return {
-        type: 'ADD-POST'
-    } as const
-}
-
-export const changePostAC = (post: string) => {
-    return {
-        type: 'CHANGE-POST',
-        post
-    } as const
-}
-
 export type MessageType = {
     id: number
     img: string
@@ -35,7 +17,7 @@ export type PostsType = {
 const initialState: InitialStateType = {
     newPostMessage: '',
     message: [],
-    posts: [],
+    posts: [{id: 1, name: "post1", img: 'https://picsum.photos/200', likes: 1}],
 }
 
 export type InitialStateType = {
@@ -68,4 +50,22 @@ export const postsProfileReducer = (state: InitialStateType = initialState, acti
 
         default: return stateCopy
     }
+}
+
+export type ActionsPostsReducerType =
+    | ReturnType<typeof changePostAC>
+    | ReturnType<typeof addPostAC>
+
+
+export const addPostAC = () => {
+    return {
+        type: 'ADD-POST'
+    } as const
+}
+
+export const changePostAC = (post: string) => {
+    return {
+        type: 'CHANGE-POST',
+        post
+    } as const
 }

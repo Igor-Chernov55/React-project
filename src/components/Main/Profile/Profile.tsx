@@ -8,6 +8,7 @@ export const Profile = (props: ProfileTypes) => {
 
     const addPost = () => {
         props.addPost()
+
     }
 
     const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {

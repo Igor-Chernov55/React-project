@@ -9,6 +9,7 @@ const Dialogs = (props: DialogsPropsType) => {
 
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         props.onChangeMessage(e.currentTarget.value);
+
     }
 
     return (

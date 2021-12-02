@@ -42,7 +42,6 @@ function App(props: RootStatesType) {
                         <Route exact path='/dialogs' render={() => {
                             return (
                                 <DialogsContainer />
-
                             )
                         }}/>
                         <Route exact path='/users' render = {() => {

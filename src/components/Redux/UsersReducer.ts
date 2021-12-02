@@ -56,17 +56,11 @@ export const usersReducer = (state:  UsersReducerType = initialState, action: Ac
         default: return state
     }
 }
-//
-// export type UsersActionType = FollowACType | UnFollowACType | SetUsersACType;
 
 type ActionType =
     | ReturnType<typeof followAC >
     | ReturnType<typeof unFollowAC >
     | ReturnType<typeof setUsersAC >
-
-type FollowACType = ReturnType<typeof followAC>
-type UnFollowACType = ReturnType<typeof unFollowAC>
-type SetUsersACType = ReturnType<typeof setUsersAC>
 
 export const followAC = (userId: number) => {
     return {

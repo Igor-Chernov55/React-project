@@ -92,7 +92,7 @@ export const store: StoreType = {
             siderMenu: [
                 {id: 1, name: 'Profile'},
                 {id: 2, name: 'Dialogs'},
-                {id: 3, name: 'Message'},
+                {id: 3, name: 'Users'},
                 {id: 4, name: 'News'},
                 {id: 5, name: 'Music'},
             ],

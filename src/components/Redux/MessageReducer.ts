@@ -12,8 +12,17 @@ export type MessageType = {
 }
 
 const initialState: InitialTypeDialogs = {
-    dialogs: [],
-    message: [],
+    dialogs: [
+        {id: 1, name: 'Pasha'},
+        {id: 2, name: 'Masha'},
+        {id: 3, name: 'Dima'},
+        {id: 4, name: 'Sasha'},
+    ],
+    message: [
+        {id: 1, img: 'src', message: 'text1'},
+        {id: 2, img: 'src', message: 'text2'},
+        {id: 3, img: 'src', message: 'text3'},
+    ],
     newMessage: ''
 }
 
@@ -31,13 +40,14 @@ export const messageReducer = (state: InitialTypeDialogs = initialState, action:
     switch (action.type) {
         case 'ADD-MESSAGE' :
 
-
-            const newMessage: DialogsType = {
+            const newMessage: MessageType = {
                     id: new Date().getTime(),
-                    name: stateCopy.newMessage
+                    img: 'https://avavatar.ru/image/4399',
+                    message: stateCopy.newMessage
             }
 
-            stateCopy.dialogs.push(newMessage)
+            stateCopy.message.push(newMessage)
+
                 return stateCopy
 
         case 'CHANGE-MESSAGE' :
