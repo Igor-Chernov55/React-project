@@ -47,7 +47,7 @@ export const messageReducer = (state: InitialTypeDialogs = initialState, action:
             }
 
             stateCopy.message.push(newMessage)
-
+            stateCopy.newMessage = ''
                 return stateCopy
 
         case 'CHANGE-MESSAGE' :

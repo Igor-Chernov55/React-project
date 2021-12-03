@@ -4,18 +4,10 @@ import Header from './components/Header/Header';
 import Sider from './components/Sider/Sider';
 import Footer from './components/Footer/Footer';
 import {Route, Switch} from 'react-router-dom';
-import {
-    ActionType,
-    DialogsPageType,
-    HeaderTopMenuType,
-    ProfilePageType,
-    SideBarType
-} from "./components/Redux/State";
-
-
+import {ActionType, DialogsPageType, HeaderTopMenuType, ProfilePageType, SideBarType} from "./components/Redux/State";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import ProfileContainer from "./components/Main/Profile/ProfileContainer";
-import Users from "./components/Users/Users";
+import {UsersContainer} from "./components/Users/UsersContainer";
 
 type RootStatesType = {
     dialogsPage: DialogsPageType
@@ -46,7 +38,7 @@ function App(props: RootStatesType) {
                         }}/>
                         <Route exact path='/users' render = {() => {
                             return (
-                                <Users />
+                                <UsersContainer />
                             )
                         }} />
                     </div>

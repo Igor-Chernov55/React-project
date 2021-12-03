@@ -1,0 +1,40 @@
+.container {
+    display: flex;
+    margin-bottom: 10px;
+}
+.container:last-child {
+    margin-bottom: 0;
+}
+
+.imageAvatar {
+    max-width: 100px;
+    margin-bottom: 10px;
+}
+
+.blockAvatar {
+    display: flex;
+    flex-direction: column;
+    margin-right: 10px;
+}
+
+.blockInfoText {
+    display: flex;
+    margin-top: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.blockUserInfo {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    margin-bottom: 10px;
+    min-width: 250px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.blockUserInfo:last-child {
+    margin-bottom: 0;
+}

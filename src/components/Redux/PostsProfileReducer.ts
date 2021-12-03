@@ -40,7 +40,7 @@ export const postsProfileReducer = (state: InitialStateType = initialState, acti
             }
 
             stateCopy.posts.push(newPost)
-
+            stateCopy.newPostMessage = ''
             return stateCopy
 
 

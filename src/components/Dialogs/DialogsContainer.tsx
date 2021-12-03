@@ -22,7 +22,7 @@ const mapStateDialogs = (state: AppStateType): MapStateDialogsType  => {
     }
 }
 
-const mapDispathDialogs = (dispath: Dispatch):MapDispathDialogsType  => {
+const mapDispathDialogs = (dispath: Dispatch): MapDispathDialogsType  => {
     return {
         addMessage: () => {
             dispath(addMessageAC())
@@ -32,7 +32,6 @@ const mapDispathDialogs = (dispath: Dispatch):MapDispathDialogsType  => {
         }
     }
 }
-
 
 export const DialogsContainer = connect(mapStateDialogs,mapDispathDialogs) (Dialogs)
 

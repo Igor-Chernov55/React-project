@@ -12,7 +12,7 @@ type UsersType = {
     text: string
 }
 
-type UsersReducerType = {
+export type UsersReducerType = {
     users:Array<UsersType>
 }
 
@@ -66,6 +66,7 @@ export const followAC = (userId: number) => {
     return {
         type: 'FOLLOW',
         userId
+
     }as const
 }
 
@@ -73,6 +74,7 @@ export const unFollowAC = (userId: number) => {
     return {
         type: 'UNFOLLOW',
         userId
+
     }as const
 }
 
