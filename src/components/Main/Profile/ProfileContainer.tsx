@@ -9,12 +9,12 @@ type MapStateProfileType = {
     profilePage: InitialStateType
 }
 
-type MapDispathProfile = {
+type MapDispatchProfile = {
     addPost : () => void
     onChangePost: (text: string) => void
 }
 
-export type ProfileTypes = MapStateProfileType & MapDispathProfile
+export type ProfileTypes = MapStateProfileType & MapDispatchProfile
 
 
 const mapStateProfile = (state : AppStateType): MapStateProfileType  => {
@@ -22,7 +22,7 @@ const mapStateProfile = (state : AppStateType): MapStateProfileType  => {
         profilePage: state.profilePage
     }
 }
-const mapDispathProfile = (dispath: Dispatch): MapDispathProfile => {
+const mapDispatchProfile = (dispath: Dispatch): MapDispatchProfile => {
     return {
         addPost : () => {
             dispath(addPostAC())
@@ -35,6 +35,6 @@ const mapDispathProfile = (dispath: Dispatch): MapDispathProfile => {
     }
 }
 
-export const ProfileContainer = connect(mapStateProfile,mapDispathProfile) (Profile)
+export const ProfileContainer = connect(mapStateProfile,mapDispatchProfile) (Profile)
 
 export default ProfileContainer

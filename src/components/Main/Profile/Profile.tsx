@@ -8,11 +8,12 @@ export const Profile = (props: ProfileTypes) => {
 
     const addPost = () => {
         props.addPost()
-
+        localStorage.setItem('value', props.profilePage.newPostMessage)
     }
 
     const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         props.onChangePost(e.currentTarget.value)
+
     }
 
     return (

@@ -4,20 +4,7 @@ import Users from "./Users";
 import {AppStateType} from "../Redux/redux-store";
 import {Dispatch} from "redux";
 import {followAC, setUsersAC, unFollowAC, UsersReducerType} from "../Redux/UsersReducer";
-
-type LocationType = {
-    city: string
-    country: string
-}
-
-type UsersType = {
-    id: number
-    followed: boolean
-    userName: string
-    status: string
-    location: LocationType
-    text: string
-}
+import {UsersClass} from "./UsersClass";
 
 type MapStateUsersType = {
     usersPage: UsersReducerType
@@ -51,6 +38,20 @@ const mapDispatchUsers = (dispatch: Dispatch): MapDispathUsersType => {
     }
 }
 
-export const UsersContainer = connect(mapStateUsers,mapDispatchUsers)(Users)
+type LocationType = {
+    city: string
+    country: string
+}
+
+type UsersType = {
+    id: number
+    followed: boolean
+    userName: string
+    status: string
+    location: LocationType
+    text: string
+}
+
+export const UsersContainer = connect(mapStateUsers,mapDispatchUsers)(UsersClass)
 
 export default UsersContainer

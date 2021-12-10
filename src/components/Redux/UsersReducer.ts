@@ -18,9 +18,9 @@ export type UsersReducerType = {
 
 const initialState = {
     users: [
-        {id: 1,followed:true, userName: 'Dimych', status:'main teacher', location: {city: 'Minsk', country:"Belarus"}, text:'some text'},
-        {id: 2,followed:false, userName: 'Vica', status:'security', location: {city: 'Moscow', country:"Russia"}, text:'hello'},
-        {id: 3,followed:true, userName: 'Pasha', status:'advanced', location: {city: 'Astana', country:"Kazhahstan"}, text:'anything'}
+        // {id: 1,followed:true, userName: 'Dimych', status:'main teacher', location: {city: 'Minsk', country:"Belarus"}, text:'some text'},
+        // {id: 2,followed:false, userName: 'Vica', status:'security', location: {city: 'Moscow', country:"Russia"}, text:'hello'},
+        // {id: 3,followed:true, userName: 'Pasha', status:'advanced', location: {city: 'Astana', country:"Kazhahstan"}, text:'anything'}
         ]
 }
 

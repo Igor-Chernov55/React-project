@@ -12,8 +12,12 @@ export const renderTree = (state: RootStateType) => {
     ReactDOM.render(
         <BrowserRouter>
             <Provider store={storeRedux}>
-                <App sideBar={state.sideBar} profilePage={state.profilePage} headerTopMenu={state.headerTopMenu}
-                     dialogsPage={state.dialogsPage} dispatch={store.dispatch.bind(store)}/>
+                <App sideBar={state.sideBar}
+                     profilePage={state.profilePage}
+                     headerTopMenu={state.headerTopMenu}
+                     dialogsPage={state.dialogsPage}
+                     dispatch={store.dispatch.bind(store)}
+                />
             </Provider>
         </BrowserRouter>,
         document.getElementById('root')
