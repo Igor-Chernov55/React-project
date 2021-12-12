@@ -6,36 +6,43 @@ type LocationType = {
 type UsersType = {
     id: number
     followed: boolean
-    userName: string
+    name: string
     status: string
     location: LocationType
     text: string
 }
 
 export type UsersReducerType = {
-    users:Array<UsersType>
+    users: Array<UsersType>
+    pageSize: number
+    totalUsersCounter: number
+    firstCount: number
 }
+
 
 const initialState = {
-    users: [
-        // {id: 1,followed:true, userName: 'Dimych', status:'main teacher', location: {city: 'Minsk', country:"Belarus"}, text:'some text'},
-        // {id: 2,followed:false, userName: 'Vica', status:'security', location: {city: 'Moscow', country:"Russia"}, text:'hello'},
-        // {id: 3,followed:true, userName: 'Pasha', status:'advanced', location: {city: 'Astana', country:"Kazhahstan"}, text:'anything'}
-        ]
+
+    users: [],
+    pageSize: 5,
+    totalUsersCounter: 100,
+    firstCount: 1
+
 }
 
 
-export const usersReducer = (state:  UsersReducerType = initialState, action: ActionType): UsersReducerType => {
+export const usersReducer = (state: UsersReducerType = initialState, action: ActionType): UsersReducerType => {
 
     switch (action.type) {
         case 'FOLLOW' : {
-            return {...state,
-                users: state.users.map((u) => u.id === action.userId ? {...u,followed: true} : u)
+            return {
+                ...state,
+                users: state.users.map((u) => u.id === action.userId ? {...u, followed: true} : u)
             }
         }
 
         case 'UNFOLLOW' : {
-            return {...state,
+            return {
+                ...state,
                 users: state.users.map(u => {
                         if (u.id === action.userId) {
                             return {...u, followed: false}
@@ -47,27 +54,35 @@ export const usersReducer = (state:  UsersReducerType = initialState, action: Ac
         }
 
         case 'SET_USERS': {
-            return{
+            return {
                 ...state,
-                users: [...state.users, ...action.users]
+                users: [...action.users]
+            }
+        }
+        case 'SET_USERS_CURRENT_PAGE': {
+            return {
+                ...state,
+                firstCount: action.firstCount
             }
         }
 
-        default: return state
+        default:
+            return state
     }
 }
 
 type ActionType =
-    | ReturnType<typeof followAC >
-    | ReturnType<typeof unFollowAC >
-    | ReturnType<typeof setUsersAC >
+    | ReturnType<typeof followAC>
+    | ReturnType<typeof unFollowAC>
+    | ReturnType<typeof setUsersAC>
+    | ReturnType<typeof setUsersCurrentPageAC>
 
 export const followAC = (userId: number) => {
     return {
         type: 'FOLLOW',
         userId
 
-    }as const
+    } as const
 }
 
 export const unFollowAC = (userId: number) => {
@@ -75,7 +90,7 @@ export const unFollowAC = (userId: number) => {
         type: 'UNFOLLOW',
         userId
 
-    }as const
+    } as const
 }
 
 export const setUsersAC = (users: Array<UsersType>) => {
@@ -83,5 +98,12 @@ export const setUsersAC = (users: Array<UsersType>) => {
         type: 'SET_USERS',
         users
 
-    }as const
+    } as const
+}
+export const setUsersCurrentPageAC = (firstCount: number) => {
+    return {
+        type: 'SET_USERS_CURRENT_PAGE',
+        firstCount
+
+    } as const
 }

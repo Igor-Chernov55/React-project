@@ -38,3 +38,12 @@
 .blockUserInfo:last-child {
     margin-bottom: 0;
 }
+
+.containerPagination {
+    display: flex;
+    margin: 10px;
+}
+
+.numBold {
+    font-weight: bold;
+}

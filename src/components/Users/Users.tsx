@@ -1,58 +1,66 @@
 import React from 'react';
-import {UsersPropsType} from "./UsersContainer";
-import classes from './User.module.css'
-import axios from "axios";
+import classes from "./User.module.css";
+import {UsersReducerType} from "../Redux/UsersReducer";
 
-const Users = (props: UsersPropsType) => {
+type UsersPropsType = {
+    usersPage: UsersReducerType
+    pageSize: number
+    totalUsersCounter: number
+    firstCount: number
+    firstCountHandler: (firstCount: number) => void
+}
+
+const Users = (props: UsersPropsType ) => {
+    let pageCount = Math.ceil(props.totalUsersCounter / props.pageSize)
+
+    let pages = [];
+    for (let i = 1; i < pageCount; i++) {
+        pages.push(i)
+    }
+
+    const firstCountHandler = (p: number) => {
+        props.firstCountHandler(p)
+    }
+
     return (
-        
-        <div>
-            <button onClick={() => {
-                if (props.usersPage.users.length === 0) {
-                    axios({
-                        method: 'get',
-                        url: 'https://social-network.samuraijs.com/api/1.0/users',
-                    })
-                        .then(function (response) {
-                            // @ts-ignore
-                            props.setUsers(response.data.items)
-                        });
-                }
-            }
-            }>setUsers</button>
-            {props.usersPage.users.map(users => {
-                return <div className={classes.container}>
-                    <div className={classes.blockAvatar}>
-                        <img className={classes.imageAvatar}
-                             src= {users.text}
-                             alt="avatar"/>
-                        <button>follow</button>
-                    </div>
-                    <div className={classes.blockUserInfo}>
-                        <div>
-                            <div>
-                                <div>
-                                    {users.userName}
-                                </div>
-                            </div>
-                            <div className={classes.blockInfoText}>
-                                {users.text}
-                            </div>
-                        </div>
-                        
-                        <div>
-                            <div>{"users.location.country"}</div>
-                            <div>{"users.location.city"}</div>
-                        </div>
-                    </div>
-                </div>
 
+     <div>
+        <div className={classes.containerPagination}>
+            {pages.map(m => {
+
+                return <span onClick={() => {firstCountHandler(m)}} className={props.usersPage.firstCount === m ? classes.numBold : ''}>{m}</span>
             })}
         </div>
+        {props.usersPage.users.map(users => {
+            return <div className={classes.container}>
+                <div className={classes.blockAvatar}>
+                    <img className={classes.imageAvatar}
+                         src={users.text}
+                         alt="avatar"/>
+                    <button>follow</button>
+                </div>
+                <div className={classes.blockUserInfo}>
+                    <div>
+                        <div>
+                            <div>
+                                {users.name}
+                            </div>
+                        </div>
+                        <div className={classes.blockInfoText}>
+                            {users.text}
+                        </div>
+                    </div>
+
+                    <div>
+                        <div>{"users.location.country"}</div>
+                        <div>{"users.location.city"}</div>
+                    </div>
+                </div>
+            </div>
+
+        })}
+    </div>
     );
 };
-
-
-let imageSrc = "https://avataaars.io/?accessoriesType=Kurt&avatarStyle=Circle&clotheColor=Blue01&clotheType=Hoodie&eyeType=EyeRoll&eyebrowType=RaisedExcitedNatural&facialHairColor=Blonde&facialHairType=BeardMagestic&hairColor=Black&hatColor=White&mouthType=Sad&skinColor=Yellow&topType=ShortHairShortWaved"
 
 export default Users;
