@@ -18,7 +18,7 @@ export class UsersAPIComponent extends React.Component<UsersPropsType> {
     }
 
 
-    firstCountHandler(p: number) {
+    firstCountHandler = (p: number) => {
         this.props.setCurrentUsers(p)
 
             axios({
