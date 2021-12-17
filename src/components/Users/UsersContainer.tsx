@@ -1,8 +1,14 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {AppStateType} from "../Redux/redux-store";
-import {Dispatch} from "redux";
-import {followAC, setUsersAC, setUsersCurrentPageAC, unFollowAC, UsersReducerType} from "../Redux/UsersReducer";
+import {
+    followAC,
+    setIsLoaderAC,
+    setUsersAC,
+    setUsersCurrentPageAC,
+    unFollowAC,
+    UsersReducerType
+} from "../Redux/UsersReducer";
 import {UsersAPIComponent} from "./UsersAPIComponent";
 
 export type MapStateUsersType = {
@@ -10,6 +16,7 @@ export type MapStateUsersType = {
     pageSize: number
     totalUsersCounter: number
     firstCount: number
+    Loader: boolean
 }
 
 type MapDispathUsersType = {
@@ -17,6 +24,7 @@ type MapDispathUsersType = {
     unfollow: (userId: number) => void
     setUsers: (user: Array<UsersType>) => void
     setCurrentUsers: (firstCount: number) => void
+    isLoader: (loader: boolean) => void
 }
 
 export type UsersPropsType = MapStateUsersType & MapDispathUsersType
@@ -27,23 +35,7 @@ const mapStateUsers = (state: AppStateType): MapStateUsersType => {
         pageSize: state.usersPage.pageSize,
         totalUsersCounter: state.usersPage.totalUsersCounter,
         firstCount: state.usersPage.firstCount,
-    }
-}
-
-const mapDispatchUsers = (dispatch: Dispatch): MapDispathUsersType => {
-    return {
-        follow: (userId: number) => {
-            dispatch(followAC(userId))
-        },
-        unfollow: (userId: number) => {
-            dispatch(unFollowAC(userId))
-        },
-        setUsers: (users: Array<UsersType>) => {
-            dispatch(setUsersAC(users))
-        },
-        setCurrentUsers: (firstCount: number) => {
-            dispatch(setUsersCurrentPageAC(firstCount))
-        }
+        Loader: state.usersPage.isLoader
     }
 }
 
@@ -61,6 +53,12 @@ type UsersType = {
     text: string
 }
 
-export const UsersContainer = connect(mapStateUsers,mapDispatchUsers)(UsersAPIComponent)
+export const UsersContainer = connect(mapStateUsers, {
+    follow: followAC,
+    unfollow: unFollowAC,
+    setUsers: setUsersAC,
+    setCurrentUsers: setUsersCurrentPageAC,
+    isLoader: setIsLoaderAC,
+})(UsersAPIComponent)
 
 export default UsersContainer

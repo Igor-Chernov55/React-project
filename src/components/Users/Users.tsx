@@ -8,16 +8,18 @@ type UsersPropsType = {
     totalUsersCounter: number
     firstCount: number
     firstCountHandler: (firstCount: number) => void
+    loader: boolean
 }
 
 const Users = (props: UsersPropsType ) => {
+
     let pageCount = Math.ceil(props.totalUsersCounter / props.pageSize)
 
     let pages = [];
     for (let i = 1; i < pageCount; i++) {
         pages.push(i)
     }
-
+    console.log(props.loader)
     const firstCountHandler = (p: number) => {
         props.firstCountHandler(p)
     }
@@ -26,6 +28,10 @@ const Users = (props: UsersPropsType ) => {
 
      <div>
         <div className={classes.containerPagination}>
+
+            {props.loader ? <div><img
+                src="https://cdn.dribbble.com/users/1787505/screenshots/7300251/media/a351d9e0236c03a539181b95faced9e0.gif"
+                alt="loaderImage"/></div> : false}
             {pages.map(m => {
 
                 return <span onClick={() => {firstCountHandler(m)}} className={props.usersPage.firstCount === m ? classes.numBold : ''}>{m}</span>

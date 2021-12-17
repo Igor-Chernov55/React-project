@@ -17,18 +17,18 @@ export type UsersReducerType = {
     pageSize: number
     totalUsersCounter: number
     firstCount: number
+    isLoader: boolean
 }
-
 
 const initialState = {
 
     users: [],
     pageSize: 5,
     totalUsersCounter: 100,
-    firstCount: 1
+    firstCount: 1,
+    isLoader: false,
 
 }
-
 
 export const usersReducer = (state: UsersReducerType = initialState, action: ActionType): UsersReducerType => {
 
@@ -52,17 +52,23 @@ export const usersReducer = (state: UsersReducerType = initialState, action: Act
                 )
             }
         }
-
         case 'SET_USERS': {
             return {
                 ...state,
                 users: [...action.users]
             }
         }
+
         case 'SET_USERS_CURRENT_PAGE': {
             return {
                 ...state,
                 firstCount: action.firstCount
+            }
+        }
+        case "ISLOADER": {
+            return{
+                ...state,
+                isLoader: action.isLoader
             }
         }
 
@@ -76,6 +82,7 @@ type ActionType =
     | ReturnType<typeof unFollowAC>
     | ReturnType<typeof setUsersAC>
     | ReturnType<typeof setUsersCurrentPageAC>
+    | ReturnType<typeof setIsLoaderAC>
 
 export const followAC = (userId: number) => {
     return {
@@ -97,13 +104,17 @@ export const setUsersAC = (users: Array<UsersType>) => {
     return {
         type: 'SET_USERS',
         users
-
     } as const
 }
 export const setUsersCurrentPageAC = (firstCount: number) => {
     return {
         type: 'SET_USERS_CURRENT_PAGE',
         firstCount
-
     } as const
+}
+export const setIsLoaderAC = (isLoader: boolean) => {
+  return {
+      type: 'ISLOADER',
+      isLoader
+  } as const
 }
