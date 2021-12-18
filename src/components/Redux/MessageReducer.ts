@@ -33,7 +33,7 @@ export type InitialTypeDialogs = {
 }
 
 
-export const messageReducer = (state: InitialTypeDialogs = initialState, action: ActionType): InitialTypeDialogs => {
+export const messageReducer = (state: InitialTypeDialogs = initialState, action: ActionsMessageReducerType): InitialTypeDialogs => {
 
     let stateCopy = {...state}
 
@@ -46,9 +46,9 @@ export const messageReducer = (state: InitialTypeDialogs = initialState, action:
                     message: stateCopy.newMessage
             }
 
-            stateCopy.message.push(newMessage)
+            stateCopy.message.unshift(newMessage)
             stateCopy.newMessage = ''
-                return stateCopy
+            return stateCopy
 
         case 'CHANGE-MESSAGE' :
 
