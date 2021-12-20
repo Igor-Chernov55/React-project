@@ -1,5 +1,3 @@
-import {ActionType, } from "./State";
-
 export type DialogsType = {
     id: number
     name: string
@@ -41,9 +39,9 @@ export const messageReducer = (state: InitialTypeDialogs = initialState, action:
         case 'ADD-MESSAGE' :
 
             const newMessage: MessageType = {
-                    id: new Date().getTime(),
-                    img: 'https://avavatar.ru/image/4399',
-                    message: stateCopy.newMessage
+                id: new Date().getTime(),
+                img: 'https://avavatar.ru/image/4399',
+                message: stateCopy.newMessage
             }
 
             stateCopy.message.unshift(newMessage)
@@ -56,9 +54,10 @@ export const messageReducer = (state: InitialTypeDialogs = initialState, action:
 
             return stateCopy
 
-        default: return stateCopy
-        }
+        default:
+            return stateCopy
     }
+}
 
 
 export type ActionsMessageReducerType =

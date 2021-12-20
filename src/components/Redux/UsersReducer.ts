@@ -65,7 +65,7 @@ export const usersReducer = (state: UsersReducerType = initialState, action: Act
                 firstCount: action.firstCount
             }
         }
-        case "ISLOADER": {
+        case "IS_LOADER": {
             return{
                 ...state,
                 isLoader: action.isLoader
@@ -114,7 +114,7 @@ export const setUsersCurrentPageAC = (firstCount: number) => {
 }
 export const setIsLoaderAC = (isLoader: boolean) => {
   return {
-      type: 'ISLOADER',
+      type: 'IS_LOADER',
       isLoader
   } as const
 }

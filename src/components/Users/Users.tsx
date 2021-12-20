@@ -1,6 +1,8 @@
 import React from 'react';
 import classes from "./User.module.css";
 import {UsersReducerType} from "../Redux/UsersReducer";
+import {NavLink} from 'react-router-dom';
+import {ProfileUsersClass} from "../ProfileUsers/ProfileUsersClass";
 
 type UsersPropsType = {
     usersPage: UsersReducerType
@@ -11,7 +13,7 @@ type UsersPropsType = {
     loader: boolean
 }
 
-const Users = (props: UsersPropsType ) => {
+const Users = (props: UsersPropsType) => {
 
     let pageCount = Math.ceil(props.totalUsersCounter / props.pageSize)
 
@@ -26,46 +28,52 @@ const Users = (props: UsersPropsType ) => {
 
     return (
 
-     <div>
-        <div className={classes.containerPagination}>
+        <div>
+            <div className={classes.containerPagination}>
 
-            {props.loader ? <div><img
-                src="https://cdn.dribbble.com/users/1787505/screenshots/7300251/media/a351d9e0236c03a539181b95faced9e0.gif"
-                alt="loaderImage"/></div> : false}
-            {pages.map(m => {
+                {props.loader ? <div><img
+                    src="https://cdn.dribbble.com/users/1787505/screenshots/7300251/media/a351d9e0236c03a539181b95faced9e0.gif"
+                    alt="loaderImage"/></div> : false}
 
-                return <span onClick={() => {firstCountHandler(m)}} className={props.usersPage.firstCount === m ? classes.numBold : ''}>{m}</span>
-            })}
-        </div>
-        {props.usersPage.users.map(users => {
-            return <div className={classes.container}>
-                <div className={classes.blockAvatar}>
-                    <img className={classes.imageAvatar}
-                         src={users.text}
-                         alt="avatar"/>
-                    <button>follow</button>
-                </div>
-                <div className={classes.blockUserInfo}>
-                    <div>
+                {pages.map(m => {
+
+                    return <span onClick={() => {
+                        firstCountHandler(m)
+                    }} className={props.usersPage.firstCount === m ? classes.numBold : ''}>{m}</span>
+                })}
+
+            </div>
+            {props.usersPage.users.map(users => {
+                return <div className={classes.container}>
+                    <div className={classes.blockAvatar}>
+                        <NavLink to='/ProfileUsersClass/'>
+                            <img className={classes.imageAvatar}
+                                 src={users.text}
+                                 alt="avatar"/>
+                        </NavLink>
+                        <button>follow</button>
+                    </div>
+                    <div className={classes.blockUserInfo}>
                         <div>
                             <div>
-                                {users.name}
+                                <div>
+                                    {users.name}
+                                </div>
+                            </div>
+                            <div className={classes.blockInfoText}>
+                                {users.text}
                             </div>
                         </div>
-                        <div className={classes.blockInfoText}>
-                            {users.text}
+
+                        <div>
+                            <div>{"users.location.country"}</div>
+                            <div>{"users.location.city"}</div>
                         </div>
                     </div>
-
-                    <div>
-                        <div>{"users.location.country"}</div>
-                        <div>{"users.location.city"}</div>
-                    </div>
                 </div>
-            </div>
 
-        })}
-    </div>
+            })}
+        </div>
     );
 };
 

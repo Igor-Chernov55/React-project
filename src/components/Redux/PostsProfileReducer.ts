@@ -48,13 +48,20 @@ export const postsProfileReducer = (state: InitialStateType = initialState, acti
             stateCopy.newPostMessage = action.post
             return stateCopy
 
-        default: return stateCopy
+        case "SET-USERS":
+            // @ts-ignore
+            return {...state, profile: action.profile}
+
+
+        default:
+            return stateCopy
     }
 }
 
 export type ActionsPostsReducerType =
     | ReturnType<typeof changePostAC>
     | ReturnType<typeof addPostAC>
+    | ReturnType<typeof setUsers>
 
 
 export const addPostAC = () => {
@@ -69,3 +76,11 @@ export const changePostAC = (post: string) => {
         post
     } as const
 }
+
+export const setUsers = (profile: any) => {
+    return {
+        type: 'SET-USERS',
+        profile
+    }as const
+}
+
