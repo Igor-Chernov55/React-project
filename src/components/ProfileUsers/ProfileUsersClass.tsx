@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import {Profile} from "../Main/Profile/Profile";
-import {useSelector} from "react-redux";
+
 
 export class ProfileUsersClass extends React.Component<any, any>{
 
@@ -23,5 +23,3 @@ export class ProfileUsersClass extends React.Component<any, any>{
         )
     }
 }
-
-const value = useSelector<any, any>(value => state.value)

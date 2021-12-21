@@ -14,19 +14,19 @@ export type PostsType = {
 }
 
 
-const initialState: InitialStateType = {
+const initialState: PostProfileType = {
     newPostMessage: '',
     message: [],
     posts: [{id: 1, name: "post1", img: 'https://picsum.photos/200', likes: 1}],
 }
 
-export type InitialStateType = {
+export type PostProfileType = {
     newPostMessage: string
     message: Array<MessageType>
     posts: Array<PostsType>
 }
 
-export const postsProfileReducer = (state: InitialStateType = initialState, action: ActionType): InitialStateType => {
+export const postsProfileReducer = (state: PostProfileType = initialState, action: ActionType): PostProfileType => {
 
     const stateCopy = {...state}
 

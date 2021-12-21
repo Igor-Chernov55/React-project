@@ -1,13 +1,20 @@
-import React, {ChangeEvent} from 'react'
+import React, {ChangeEvent, useEffect} from 'react'
 import Post from './Posts/Posts'
 import classes from './Profile.module.css'
-import {ProfileTypes} from "./ProfileContainer";
+import {useDispatch, useSelector} from "react-redux";
+import {AppStateType} from "../../Redux/redux-store";
+import {addPostAC, PostProfileType} from "../../Redux/PostsProfileReducer";
 
 
-export const Profile = (props: ProfileTypes) => {
+export const Profile = (props: any) => {
 
+    const state = useSelector<AppStateType, PostProfileType>(state => state.profilePage)
+    const dispatch = useDispatch();
+    useEffect(()=>{
+
+    }, [])
     const addPost = () => {
-        props.addPost()
+        dispatch(addPostAC())
         localStorage.setItem('value', props.profilePage.newPostMessage)
     }
 
@@ -25,10 +32,10 @@ export const Profile = (props: ProfileTypes) => {
             <div>
                 My posts
                 <div>
-                    <textarea value={props.profilePage.newPostMessage} onChange={onChange} name="textPost"/>
+                    <textarea value={state.newPostMessage} onChange={onChange} name="textPost"/>
                     <button onClick={addPost}>опубликовать</button>
                 </div>
-                {props.profilePage.posts.map(p => <Post key={p.id} id={p.id} name={p.name} img={p.img} likes={p.likes}/>)}
+                {state.posts.map(p => <Post key={p.id} id={p.id} name={p.name} img={p.img} likes={p.likes}/>)}
             </div>
         </>
     )

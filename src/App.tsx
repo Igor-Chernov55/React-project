@@ -8,6 +8,7 @@ import {ActionType, DialogsPageType, HeaderTopMenuType, ProfilePageType, SideBar
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import ProfileContainer from "./components/Main/Profile/ProfileContainer";
 import {UsersContainer} from "./components/Users/UsersContainer";
+import {Profile} from "./components/Main/Profile/Profile";
 
 type RootStatesType = {
     dialogsPage: DialogsPageType
@@ -28,7 +29,7 @@ function App(props: RootStatesType) {
 
                         <Route exact path={['/', '/profile']} render={() => {
                             return (
-                                <ProfileContainer />
+                                <Profile />
                             )
                         }}/>
                         <Route exact path='/dialogs' render={() => {
