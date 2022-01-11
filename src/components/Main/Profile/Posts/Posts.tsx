@@ -1,6 +1,6 @@
 import React from 'react'
 import classes from './Posts.module.css'
-import {PostsType} from "../../../Redux/State";
+import {PostsType} from "../../../Redux/PostsProfileReducer";
 
 type PostType = {
     id: number

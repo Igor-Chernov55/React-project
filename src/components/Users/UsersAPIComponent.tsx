@@ -7,10 +7,13 @@ export class UsersAPIComponent extends React.Component<UsersPropsType> {
 
     componentDidMount() {
         if (this.props.usersPage.users.length === 0) {
-            axios({
-                method: 'get',
-                url: `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.usersPage.firstCount}&count=${this.props.pageSize}`,
-            })
+            axios(
+                `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.usersPage.firstCount}&count=${this.props.pageSize}`,
+
+                {
+                    withCredentials: true
+                }
+            )
                 .then((response) => {
                     this.props.setUsers(response.data.items)
                 });
@@ -39,7 +42,8 @@ export class UsersAPIComponent extends React.Component<UsersPropsType> {
             firstCount={this.props.firstCount}
             firstCountHandler={this.firstCountHandler}
             loader={this.props.Loader}
-
+            follow={this.props.follow}
+            unfollow={this.props.unfollow}
         />
     }
 }

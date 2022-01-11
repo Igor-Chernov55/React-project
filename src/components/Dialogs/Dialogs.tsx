@@ -5,7 +5,7 @@ import {Message} from "./DialogsMessage/Message";
 import {DialogsPropsType} from "./DialogsContainer";
 
 
-const Dialogs = (props: DialogsPropsType) => {
+const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         props.onChangeMessage(e.currentTarget.value);

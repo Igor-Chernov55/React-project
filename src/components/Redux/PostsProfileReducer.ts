@@ -1,4 +1,3 @@
-import {ActionType} from "./State";
 
 export type MessageType = {
     id: number
@@ -18,15 +17,17 @@ const initialState: PostProfileType = {
     newPostMessage: '',
     message: [],
     posts: [{id: 1, name: "post1", img: 'https://picsum.photos/200', likes: 1}],
+    profile: null
 }
 
 export type PostProfileType = {
     newPostMessage: string
     message: Array<MessageType>
     posts: Array<PostsType>
+    profile: null
 }
 
-export const postsProfileReducer = (state: PostProfileType = initialState, action: ActionType): PostProfileType => {
+export const postsProfileReducer = (state: PostProfileType = initialState, action: ActionsPostsReducerType): PostProfileType => {
 
     const stateCopy = {...state}
 
@@ -49,7 +50,7 @@ export const postsProfileReducer = (state: PostProfileType = initialState, actio
             return stateCopy
 
         case "SET-USERS":
-            // @ts-ignore
+
             return {...state, profile: action.profile}
 
 

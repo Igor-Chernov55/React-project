@@ -9,6 +9,7 @@ import {
     unFollowAC,
     UsersReducerType
 } from "../Redux/UsersReducer";
+
 import {UsersAPIComponent} from "./UsersAPIComponent";
 
 export type MapStateUsersType = {
@@ -19,15 +20,16 @@ export type MapStateUsersType = {
     Loader: boolean
 }
 
-type MapDispathUsersType = {
+type MapDispatchUsersType = {
     follow: (userId: number) => void
     unfollow: (userId: number) => void
     setUsers: (user: Array<UsersType>) => void
     setCurrentUsers: (firstCount: number) => void
     isLoader: (loader: boolean) => void
+
 }
 
-export type UsersPropsType = MapStateUsersType & MapDispathUsersType
+export type UsersPropsType = MapStateUsersType & MapDispatchUsersType
 
 const mapStateUsers = (state: AppStateType): MapStateUsersType => {
     return {

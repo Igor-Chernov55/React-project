@@ -9,12 +9,12 @@ type MapStateDialogsType = {
     dialogsPage: InitialTypeDialogs
 }
 
-type MapDispathDialogsType = {
+type MapDispatchDialogsType = {
     addMessage: () => void
     onChangeMessage: (message: string) => void
 }
 
-export type DialogsPropsType = MapStateDialogsType & MapDispathDialogsType
+export type DialogsPropsType = MapStateDialogsType & MapDispatchDialogsType
 
 const mapStateDialogs = (state: AppStateType): MapStateDialogsType  => {
     return {
@@ -22,7 +22,7 @@ const mapStateDialogs = (state: AppStateType): MapStateDialogsType  => {
     }
 }
 
-const mapDispathDialogs = (dispath: Dispatch): MapDispathDialogsType  => {
+const mapDispathDialogs = (dispath: Dispatch): MapDispatchDialogsType  => {
     return {
         addMessage: () => {
             dispath(addMessageAC())
