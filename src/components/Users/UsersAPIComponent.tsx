@@ -6,8 +6,8 @@ import Users from "./Users";
 export class UsersAPIComponent extends React.Component<UsersPropsType> {
 
     componentDidMount() {
-        if (this.props.usersPage.users.length === 0) {
-            axios(
+
+            axios.get(
                 `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.usersPage.firstCount}&count=${this.props.pageSize}`,
 
                 {
@@ -17,7 +17,7 @@ export class UsersAPIComponent extends React.Component<UsersPropsType> {
                 .then((response) => {
                     this.props.setUsers(response.data.items)
                 });
-        }
+
     }
 
     firstCountHandler = (p: number) => {

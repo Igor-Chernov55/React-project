@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useEffect, useState} from 'react'
+import React, {ChangeEvent, useEffect} from 'react'
 import Post from './Posts/Posts'
 import classes from './Profile.module.css'
 import {useDispatch, useSelector} from "react-redux";
@@ -8,14 +8,13 @@ import axios from "axios";
 import {useParams} from "react-router-dom";
 
 
-export const Profile:React.FC<any> = (props) => {
+export const Profile: React.FC<any> = (props) => {
 
     const state = useSelector<AppStateType, PostProfileType>(state => state.profilePage)
     const dispatch = useDispatch();
-    //const [userId, setUsserId] = useState(2)
     const {users} = useParams<any>()
 
-    useEffect(()=>{
+    useEffect(() => {
         //const userId = props.match.params.userId
 
         axios({
@@ -33,7 +32,6 @@ export const Profile:React.FC<any> = (props) => {
     }
 
 
-
     const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         props.onChangePost(e.currentTarget.value)
     }
@@ -41,6 +39,7 @@ export const Profile:React.FC<any> = (props) => {
     return (
         <>
             <div className={classes.infoBlock}>
+                <div></div>
                 <div>{state.profile}</div>
             </div>
 

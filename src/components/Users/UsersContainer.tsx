@@ -46,9 +46,15 @@ type LocationType = {
     country: string
 }
 
+type PhotosType = {
+    large: string
+    small: string
+}
+
 type UsersType = {
     id: number
     followed: boolean
+    photos: PhotosType
     name: string
     status: string
     location: LocationType

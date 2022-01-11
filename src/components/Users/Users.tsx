@@ -47,11 +47,12 @@ const Users = (props: UsersPropsType) => {
 
             </div>
             {props.usersPage.users.map(users => {
+
                 return <div className={classes.container}>
                     <div className={classes.blockAvatar}>
                         <NavLink to={`/profile/${users.id}`}>
                             <img className={classes.imageAvatar}
-                                 src={users.text}
+                                 src={users.photos.large}
                                  alt="avatar"/>
                         </NavLink>
                         <div>
@@ -63,7 +64,7 @@ const Users = (props: UsersPropsType) => {
                                         'API-KEY': '78b9fdb7-2cb3-4cc9-90a9-7547abd3a933'
                                     }
                                     }).then((response) => {
-                                            if (response.data.resultCode == 0) {
+                                            if (response.data.resultCode === 0) {
                                                 props.unfollow(users.id)
                                             }
                                     })
@@ -93,13 +94,13 @@ const Users = (props: UsersPropsType) => {
                                 </div>
                             </div>
                             <div className={classes.blockInfoText}>
-                                {users.text}
+                                {users.status}
                             </div>
                         </div>
 
                         <div>
-                            <div>{"users.location.country"}</div>
-                            <div>{"users.location.city"}</div>
+                            {/*<div>{users.location.country}</div>*/}
+                            {/*<div>{users.location.city}</div>*/}
                         </div>
                     </div>
                 </div>
