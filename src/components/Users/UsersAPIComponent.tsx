@@ -27,6 +27,7 @@ export class UsersAPIComponent extends React.Component<UsersPropsType> {
         axios({
             method: 'get',
             url: `https://social-network.samuraijs.com/api/1.0/users?page=${p}&count=${this.props.pageSize}`,
+            withCredentials: true
         })
             .then((response) => {
                 this.props.setUsers(response.data.items)
