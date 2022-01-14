@@ -24,16 +24,16 @@ export type UsersReducerType = {
     totalUsersCounter: number
     firstCount: number
     isLoader: boolean
+    isFetching: Array<number>
 }
 
 const initialState = {
-
     users: [],
     pageSize: 5,
     totalUsersCounter: 100,
     firstCount: 1,
     isLoader: false,
-
+    isFetching: []
 }
 
 export const usersReducer = (state: UsersReducerType = initialState, action: ActionType): UsersReducerType => {
@@ -72,12 +72,22 @@ export const usersReducer = (state: UsersReducerType = initialState, action: Act
             }
         }
         case "IS_LOADER": {
-            return{
+            return {
                 ...state,
                 isLoader: action.isLoader
             }
         }
 
+        case 'FOLLOW-UN-PROGRESS': {
+            return {
+                ...state,
+                isFetching: action.isFetching
+                    ?
+                    [...state.isFetching, action.userId]
+                    :
+                    state.isFetching.filter(user => user !== action.userId)
+            }
+        }
         default:
             return state
     }
@@ -89,6 +99,7 @@ type ActionType =
     | ReturnType<typeof setUsersAC>
     | ReturnType<typeof setUsersCurrentPageAC>
     | ReturnType<typeof setIsLoaderAC>
+    | ReturnType<typeof followInProgress>
 
 export const followAC = (userId: number) => {
     return {
@@ -119,8 +130,15 @@ export const setUsersCurrentPageAC = (firstCount: number) => {
     } as const
 }
 export const setIsLoaderAC = (isLoader: boolean) => {
-  return {
-      type: 'IS_LOADER',
-      isLoader
-  } as const
+    return {
+        type: 'IS_LOADER',
+        isLoader
+    } as const
+}
+export const followInProgress = (isFetching: boolean, userId: number ) => {
+    return {
+        type: 'FOLLOW-UN-PROGRESS',
+        isFetching,
+        userId
+    } as const
 }

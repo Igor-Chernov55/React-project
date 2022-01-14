@@ -13,6 +13,8 @@ type UsersPropsType = {
     loader: boolean
     follow: (userId: number) => void
     unfollow: (userId: number) => void
+    followInProgress: (value: boolean, isFetching: number) => void
+    isFetching: Array<number>
 }
 
 const Users = (props: UsersPropsType) => {
@@ -57,7 +59,8 @@ const Users = (props: UsersPropsType) => {
                         </NavLink>
                         <div>
                             {users.followed ?
-                                <button onClick={() => {
+                                <button disabled={props.isFetching.some(id => id === users.id)} onClick={() => {
+                                    props.followInProgress(true, users.id)
                                     axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${users.id}`, {
                                         withCredentials: true,
                                         headers: {
@@ -67,11 +70,12 @@ const Users = (props: UsersPropsType) => {
                                             if (response.data.resultCode === 0) {
                                                 props.unfollow(users.id)
                                             }
+                                            props.followInProgress(false, users.id)
                                     })
                                 }
                                 }>unFollow</button>
                                 :
-                                <button onClick={() => {
+                                <button disabled={props.isFetching.some(id => id === users.id)} onClick={() => {
                                     axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${users.id}`, {},{
                                         withCredentials: true,
                                         headers: {
