@@ -15,7 +15,6 @@ export const Profile: React.FC<any> = (props) => {
     const {users} = useParams<any>()
 
     useEffect(() => {
-        //const userId = props.match.params.userId
 
         axios({
             method: 'get',
@@ -39,7 +38,6 @@ export const Profile: React.FC<any> = (props) => {
     return (
         <>
             <div className={classes.infoBlock}>
-                <div></div>
                 <div>{state.profile}</div>
             </div>
 

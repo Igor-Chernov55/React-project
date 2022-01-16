@@ -2,7 +2,7 @@ import React from 'react';
 import classes from "./User.module.css";
 import {UsersReducerType} from "../Redux/UsersReducer";
 import {NavLink} from 'react-router-dom';
-import axios from "axios";
+import {usersAPI} from "../API/UserAPI";
 
 type UsersPropsType = {
     usersPage: UsersReducerType
@@ -61,13 +61,9 @@ const Users = (props: UsersPropsType) => {
                             {users.followed ?
                                 <button disabled={props.isFetching.some(id => id === users.id)} onClick={() => {
                                     props.followInProgress(true, users.id)
-                                    axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${users.id}`, {
-                                        withCredentials: true,
-                                        headers: {
-                                        'API-KEY': '78b9fdb7-2cb3-4cc9-90a9-7547abd3a933'
-                                    }
-                                    }).then((response) => {
-                                            if (response.data.resultCode === 0) {
+
+                                    usersAPI.deleteUsers(users.id).then((data) => {
+                                            if (data.resultCode === 0) {
                                                 props.unfollow(users.id)
                                             }
                                             props.followInProgress(false, users.id)
@@ -76,13 +72,9 @@ const Users = (props: UsersPropsType) => {
                                 }>unFollow</button>
                                 :
                                 <button disabled={props.isFetching.some(id => id === users.id)} onClick={() => {
-                                    axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${users.id}`, {},{
-                                        withCredentials: true,
-                                        headers: {
-                                           'API-KEY': '78b9fdb7-2cb3-4cc9-90a9-7547abd3a933'
-                                        }
-                                    }).then((response) => {
-                                        if (response.data.resultCode == 0) {
+
+                                    usersAPI.postUsers(users.id).then((data) => {
+                                        if (data.resultCode == 0) {
                                             props.follow(users.id)
                                         }
                                     })

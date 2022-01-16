@@ -1,36 +1,23 @@
 import React from "react";
-import axios from "axios";
 import {UsersPropsType} from "./UsersContainer";
 import Users from "./Users";
+import {usersAPI} from "../API/UserAPI";
 
 export class UsersAPIComponent extends React.Component<UsersPropsType> {
 
     componentDidMount() {
-
-        axios.get(
-            `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.usersPage.firstCount}&count=${this.props.pageSize}`,
-
-            {
-                withCredentials: true
-            }
+        usersAPI.getUsers(this.props.firstCount, this.props.pageSize).then(data =>
+            this.props.setUsers(data.items)
         )
-            .then((response) => {
-                this.props.setUsers(response.data.items)
-            });
-
     }
 
-    firstCountHandler = (p: number) => {
+    firstCountHandler = (pageNumber: number) => {
         this.props.isLoader(true)
-        this.props.setCurrentUsers(p)
+        this.props.setCurrentUsers(pageNumber)
 
-        axios({
-            method: 'get',
-            url: `https://social-network.samuraijs.com/api/1.0/users?page=${p}&count=${this.props.pageSize}`,
-            withCredentials: true
-        })
-            .then((response) => {
-                this.props.setUsers(response.data.items)
+        usersAPI.getUsers(pageNumber, this.props.pageSize)
+            .then((data) => {
+                this.props.setUsers(data.items)
                 this.props.isLoader(false)
             });
     }
