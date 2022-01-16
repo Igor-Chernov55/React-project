@@ -2,11 +2,11 @@ import React from 'react';
 import {connect} from "react-redux";
 import {AppStateType} from "../Redux/redux-store";
 import {
-    followAC, followInProgress,
+    followAC, followInProgress, followSucces, getUsersTC,
     setIsLoaderAC,
     setUsersAC,
     setUsersCurrentPageAC,
-    unFollowAC,
+    unFollowAC, unFollowSucces,
     UsersReducerType
 } from "../Redux/UsersReducer";
 
@@ -28,6 +28,9 @@ type MapDispatchUsersType = {
     setCurrentUsers: (firstCount: number) => void
     isLoader: (loader: boolean) => void
     followInProgress: (value: boolean, isFetching: number) => void
+    getUsersTC: (pageNumber: number, pageSize: number) => void
+    followSucces: (userId: number) => void
+    unFollowSucces: (userId: number) => void
 }
 
 export type UsersPropsType = MapStateUsersType & MapDispatchUsersType
@@ -70,6 +73,10 @@ export const UsersContainer = connect(mapStateUsers, {
     setCurrentUsers: setUsersCurrentPageAC,
     isLoader: setIsLoaderAC,
     followInProgress: followInProgress,
+    getUsersTC: getUsersTC,
+    followSucces: followSucces,
+    unFollowSucces: unFollowSucces,
+
 })(UsersAPIComponent)
 
 export default UsersContainer

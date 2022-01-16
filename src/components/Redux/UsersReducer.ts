@@ -1,3 +1,6 @@
+import {Dispatch} from "redux";
+import {usersAPI} from "../API/UserAPI";
+
 type LocationType = {
     city: string
     country: string
@@ -135,10 +138,50 @@ export const setIsLoaderAC = (isLoader: boolean) => {
         isLoader
     } as const
 }
-export const followInProgress = (isFetching: boolean, userId: number ) => {
+export const followInProgress = (isFetching: boolean, userId: number) => {
     return {
         type: 'FOLLOW-UN-PROGRESS',
         isFetching,
         userId
     } as const
+}
+
+export const getUsersTC = (pageNumber: number, pageSize: number) => {
+
+    return (dispatch: Dispatch) => {
+        dispatch(setIsLoaderAC(true))
+        dispatch(setUsersCurrentPageAC(pageNumber))
+
+        usersAPI.getUsers(pageNumber, pageSize)
+            .then((data) => {
+                dispatch(setUsersAC(data.items))
+                dispatch(setIsLoaderAC(false))
+            })
+    }
+}
+
+export const followSucces = (userId: number) => {
+    return (dispatch: Dispatch) => {
+
+        usersAPI.follow(userId)
+            .then((data) => {
+            if (data.resultCode === 0) {
+                dispatch(followAC(userId))
+            }
+        })
+    }
+}
+
+export const unFollowSucces = (userId: number) => {
+
+    return (dispatch: Dispatch) => {
+        dispatch(followInProgress(true, userId))
+
+        usersAPI.unFollow(userId).then((data) => {
+            if (data.resultCode === 0) {
+                dispatch(unFollowAC(userId))
+            }
+            dispatch(followInProgress(false, userId))
+        })
+    }
 }

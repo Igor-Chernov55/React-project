@@ -19,14 +19,14 @@ export const usersAPI = {
         ).then((response) => response.data)
     },
 
-    deleteUsers(userId: number) {
-        return instance.delete(
+    follow(userId: number) {
+        return instance.post(
             `follow/${userId}`
         ).then((response) => response.data)
     },
 
-    postUsers(userId: number) {
-        return instance.post(
+    unFollow(userId: number) {
+        return instance.delete(
             `follow/${userId}`
         ).then((response) => response.data)
     }
