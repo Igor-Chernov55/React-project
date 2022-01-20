@@ -4,8 +4,8 @@ import classes from './Profile.module.css'
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../Redux/redux-store";
 import {addPostAC, PostProfileType, setUsers} from "../../Redux/PostsProfileReducer";
-import axios from "axios";
 import {useParams} from "react-router-dom";
+import {usersAPI} from "../../API/UserAPI";
 
 
 export const Profile: React.FC<any> = (props) => {
@@ -15,12 +15,7 @@ export const Profile: React.FC<any> = (props) => {
     const {users} = useParams<any>()
 
     useEffect(() => {
-
-        axios({
-            method: 'get',
-            url: `https://social-network.samuraijs.com/api/1.0/profile/` + users,
-        })
-            .then((response) => {
+            usersAPI.getProfile(users).then((response) => {
                 dispatch(setUsers(response.data.items))
             });
     }, [users])

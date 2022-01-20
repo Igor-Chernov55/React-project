@@ -12,23 +12,27 @@ const instance = axios.create({
 export const usersAPI = {
     getUsers(firstCount: number, pageSize: number) {
         return instance.get(
-            `users?page=${firstCount}&count=${pageSize}`,
-            {
-                withCredentials: true
-            }
+            `users?page=${firstCount}&count=${pageSize}`
+
         ).then((response) => response.data)
     },
-
     follow(userId: number) {
         return instance.post(
             `follow/${userId}`
         ).then((response) => response.data)
     },
-
     unFollow(userId: number) {
         return instance.delete(
             `follow/${userId}`
         ).then((response) => response.data)
+    },
+    getProfile(users: string){
+      return instance.get(`profile/${users}`)
     }
+}
 
+export const authAPI = {
+    me() {
+        return instance.get(`auth/me`)
+    }
 }
