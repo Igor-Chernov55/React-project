@@ -25,9 +25,9 @@ export const authUsersReducer = (state: any = initialState, action: ActionType) 
     }
 }
 
-type ActionType = ReturnType<typeof authUser>;
+type ActionType = ReturnType<typeof authUserAC>;
 
-export const authUser = (id: number, email: string | number, login: string | number) => {
+export const authUserAC = (id: number, email: string | number, login: string | number) => {
     return {
         type: 'AUTH-USER',
         data: {

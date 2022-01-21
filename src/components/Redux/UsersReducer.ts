@@ -165,16 +165,15 @@ export const followSucces = (userId: number) => {
 
         usersAPI.follow(userId)
             .then((data) => {
-            if (data.resultCode === 0) {
-                dispatch(followAC(userId))
-            }
-        })
+                if (data.resultCode === 0) {
+                    dispatch(followAC(userId))
+                }
+            })
     }
 }
 
-export const unFollowSucces = (userId: number) => {
-
-    return (dispatch: Dispatch) => {
+export const unFollowSucces = (userId: number) =>
+    (dispatch: Dispatch) => {
         dispatch(followInProgress(true, userId))
 
         usersAPI.unFollow(userId).then((data) => {
@@ -184,4 +183,3 @@ export const unFollowSucces = (userId: number) => {
             dispatch(followInProgress(false, userId))
         })
     }
-}

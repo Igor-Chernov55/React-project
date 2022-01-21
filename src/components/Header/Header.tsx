@@ -26,8 +26,7 @@ export type AuthUsersType = {
     isAuth: boolean
 }
 
-const Header = (props: any) => {
-
+const Header = (props: AuthUsersType) => {
     const map = initialStateType.header.map((m) => {
         return (<NavMenu key={m.id} id={m.id} name={m.name}/>)
     })
@@ -39,7 +38,7 @@ const Header = (props: any) => {
                      src="https://media.istockphoto.com/vectors/initial-letter-o-swoosh-orbit-logo-designs-vector-o-initial-logo-for-vector-id1256830588?k=20&m=1256830588&s=170667a&w=0&h=GmfquF0BgJwSJVlLRMQE8sTGo266tOP-Aoa5XewVHOo="
                      alt="logo"/></NavLink>
             <nav>
-                <div>{props.isAuth ? props.login : <NavLink to='/profile'>login</NavLink>}</div>
+                <div>{props.isAuth ? props.login : <NavLink to='/login'>loggggin</NavLink>}</div>
                 <ul className={classes.headerItem}>
                     {map}
                 </ul>

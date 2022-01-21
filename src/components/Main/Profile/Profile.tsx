@@ -3,10 +3,8 @@ import Post from './Posts/Posts'
 import classes from './Profile.module.css'
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../Redux/redux-store";
-import {addPostAC, PostProfileType, setUsers} from "../../Redux/PostsProfileReducer";
+import {addPostAC, getPostProfile, PostProfileType} from "../../Redux/PostsProfileReducer";
 import {useParams} from "react-router-dom";
-import {usersAPI} from "../../API/UserAPI";
-
 
 export const Profile: React.FC<any> = (props) => {
 
@@ -15,9 +13,7 @@ export const Profile: React.FC<any> = (props) => {
     const {users} = useParams<any>()
 
     useEffect(() => {
-            usersAPI.getProfile(users).then((response) => {
-                dispatch(setUsers(response.data.items))
-            });
+        dispatch(getPostProfile(users))
     }, [users])
 
     const addPost = () => {
@@ -25,15 +21,16 @@ export const Profile: React.FC<any> = (props) => {
         localStorage.setItem('value', props.profilePage.newPostMessage)
     }
 
-
     const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         props.onChangePost(e.currentTarget.value)
     }
 
     return (
-        <>
+        <div>
             <div className={classes.infoBlock}>
-                <div>{state.profile}</div>
+                <div>{state.profile.fullName}</div>
+                {/*<img src={state.profile.photos.small} alt="dsaf"/>*/}
+                {/*<div>{state.profile.photos.small}</div>*/}
             </div>
 
             <div>
@@ -44,7 +41,7 @@ export const Profile: React.FC<any> = (props) => {
                 </div>
                 {state.posts.map(p => <Post key={p.id} id={p.id} name={p.name} img={p.img} likes={p.likes}/>)}
             </div>
-        </>
+        </div>
     )
 }
 

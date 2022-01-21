@@ -15,7 +15,7 @@ function App() {
                 <div className={classes.Container}>
                     <HeaderContainer />
                     <div className={classes.ContentBlock}>
-                        <Sider/>
+                        <Sider />
                         <Switch>
                         <Route path='/profile/:users?' render={() => <Profile />}/>
                         <Route path='/dialogs' render={() => <DialogsContainer />}/>

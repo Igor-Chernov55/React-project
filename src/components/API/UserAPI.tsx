@@ -26,13 +26,13 @@ export const usersAPI = {
             `follow/${userId}`
         ).then((response) => response.data)
     },
-    getProfile(users: string){
+    getProfile(users: number){
       return instance.get(`profile/${users}`)
     }
 }
 
 export const authAPI = {
     me() {
-        return instance.get(`auth/me`)
+        return axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`)
     }
 }

@@ -1,7 +1,6 @@
 import React from "react";
 import {UsersPropsType} from "./UsersContainer";
 import Users from "./Users";
-import {usersAPI} from "../API/UserAPI";
 
 export class UsersAPIComponent extends React.Component<UsersPropsType> {
 

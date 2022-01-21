@@ -2,7 +2,6 @@ import React from 'react';
 import classes from "./User.module.css";
 import {UsersReducerType} from "../Redux/UsersReducer";
 import {NavLink} from 'react-router-dom';
-import {usersAPI} from "../API/UserAPI";
 
 type UsersPropsType = {
     usersPage: UsersReducerType

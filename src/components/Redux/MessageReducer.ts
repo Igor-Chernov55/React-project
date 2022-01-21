@@ -59,7 +59,6 @@ export const messageReducer = (state: InitialTypeDialogs = initialState, action:
     }
 }
 
-
 export type ActionsMessageReducerType =
     | ReturnType<typeof addMessageAC>
     | ReturnType<typeof changeMessageAC>
