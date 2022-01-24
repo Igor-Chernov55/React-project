@@ -4,16 +4,18 @@ import classes from './Profile.module.css'
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../Redux/redux-store";
 import {addPostAC, getPostProfile, PostProfileType} from "../../Redux/PostsProfileReducer";
-import {useParams} from "react-router-dom";
+import {Redirect, useParams} from "react-router-dom";
+import {AuthUsersType} from "../../Redux/AuthUsersReducer";
 
 export const Profile: React.FC<any> = (props) => {
 
     const state = useSelector<AppStateType, PostProfileType>(state => state.profilePage)
+    const stateIsAuth = useSelector<AppStateType, AuthUsersType>(state => state.authUser.isAuth)
     const dispatch = useDispatch();
     const {users} = useParams<any>()
 
     useEffect(() => {
-        dispatch(getPostProfile(users))
+        dispatch(getPostProfile(2))
     }, [users])
 
     const addPost = () => {
@@ -24,13 +26,17 @@ export const Profile: React.FC<any> = (props) => {
     const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         props.onChangePost(e.currentTarget.value)
     }
-
-    return (
+if (!state.profile) {
+    return <div>...loading</div>
+}
+    // if (!stateIsAuth) return <Redirect to={'/login'} />
+     return (
         <div>
             <div className={classes.infoBlock}>
-                <div>{state.profile.fullName}</div>
-                {/*<img src={state.profile.photos.small} alt="dsaf"/>*/}
-                {/*<div>{state.profile.photos.small}</div>*/}
+
+                <div>{state.profile.fullName && state.profile.fullName}</div>
+                <img src={state.profile.photos && state.profile.photos.large ? state.profile.photos.large : ''} alt=""/>
+                {/*<div>{state.profile.photos.large}</div>*/}
             </div>
 
             <div>

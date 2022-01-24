@@ -21,7 +21,8 @@ export const authUsersReducer = (state: any = initialState, action: ActionType) 
                 ...action.data
             }
         }
-
+        default:
+            return state
     }
 }
 

@@ -15,14 +15,14 @@ export type PostsType = {
 }
 
 type ContactsType = {
-    github: string
-    vk: string
-    facebook: string
-    instagram: string
-    twitter: string
-    website: string
-    youtube: string
-    mainLink: string
+    github: string | null
+    vk: string | null
+    facebook: string | null
+    instagram: string | null
+    twitter: string | null
+    website: string | null
+    youtube: string | null
+    mainLink: string | null
 }
 
 const initialState: PostProfileType = {
@@ -32,21 +32,21 @@ const initialState: PostProfileType = {
     profile: {
         userId: 0,
         lookingForAJob: false,
-        lookingForAJobDescription: '',
-        fullName: '',
+        lookingForAJobDescription: null,
+        fullName: null,
         contacts: {
-            github: '',
-            vk: '',
-            facebook: '',
-            instagram: '',
-            twitter: '',
-            website: '',
-            youtube: '',
-            mainLink: '',
+            github: null,
+            vk: null,
+            facebook: null,
+            instagram: null,
+            twitter: null,
+            website: null,
+            youtube: null,
+            mainLink: null,
         },
         photos: {
-            small: '',
-            large: '',
+            small: null,
+            large: null,
         }
         ,
     }
@@ -59,12 +59,12 @@ export type PostProfileType = {
     profile: {
         userId: number
         lookingForAJob: boolean
-        lookingForAJobDescription: string
-        fullName: string
+        lookingForAJobDescription: string | null
+        fullName: string | null
         contacts: ContactsType
         photos: {
-            small: string
-            large: string
+            small: string | null
+            large: string | null
         }
     }
 }

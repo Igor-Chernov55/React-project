@@ -4,6 +4,7 @@ import {AppStateType} from "../Redux/redux-store";
 import {addMessageAC, changeMessageAC, InitialTypeDialogs} from "../Redux/MessageReducer";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
+import {authComponentHOC} from "../HOC/AuthComponentHOC";
 
 type MapStateDialogsType = {
     dialogsPage: InitialTypeDialogs
@@ -18,7 +19,7 @@ export type DialogsPropsType = MapStateDialogsType & MapDispatchDialogsType
 
 const mapStateDialogs = (state: AppStateType): MapStateDialogsType  => {
     return {
-        dialogsPage: state.dialogsPage
+        dialogsPage: state.dialogsPage,
     }
 }
 
@@ -33,6 +34,4 @@ const mapDispathDialogs = (dispath: Dispatch): MapDispatchDialogsType  => {
     }
 }
 
-export const DialogsContainer = connect(mapStateDialogs,mapDispathDialogs) (Dialogs)
-
-export default DialogsContainer
+export default authComponentHOC(connect(mapStateDialogs,mapDispathDialogs) (Dialogs))

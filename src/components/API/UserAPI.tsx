@@ -1,4 +1,3 @@
-import React from 'react';
 import axios from "axios";
 
 const instance = axios.create({
@@ -33,6 +32,6 @@ export const usersAPI = {
 
 export const authAPI = {
     me() {
-        return axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`)
+        return instance.get(`auth/me`)
     }
 }

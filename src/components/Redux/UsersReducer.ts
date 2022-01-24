@@ -17,7 +17,7 @@ type UsersType = {
     name: string
     status: string
     location: LocationType
-    photos: PhotosType
+    photos: null | PhotosType
     text: string
 }
 
@@ -33,7 +33,7 @@ export type UsersReducerType = {
 const initialState = {
     users: [],
     pageSize: 5,
-    totalUsersCounter: 100,
+    totalUsersCounter: 1000,
     firstCount: 1,
     isLoader: false,
     isFetching: []
