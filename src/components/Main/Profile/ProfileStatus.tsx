@@ -4,6 +4,7 @@ import React from "react";
 export class ProfileStatus extends React.Component{
 
      state = {
+
         editMode: false
     }
 
