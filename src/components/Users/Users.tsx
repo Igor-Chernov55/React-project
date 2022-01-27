@@ -55,7 +55,7 @@ const Users = (props: UsersPropsType) => {
                     <div className={classes.blockAvatar}>
                         <NavLink to={`/profile/${users.id}`}>
                             <img className={classes.imageAvatar}
-                                 src={users.photos.large}
+                                 src={users.photos ? users.photos.large : ""}
                                  alt="avatar"/>
                         </NavLink>
                         <div>

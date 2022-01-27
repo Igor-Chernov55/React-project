@@ -2,6 +2,7 @@ import React, {ComponentType} from "react";
 import {Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 import {AppStateType} from "../Redux/redux-store";
+import {compose} from "redux";
 
 type MapStatePropsType = {
     isAuth: boolean
@@ -22,6 +23,6 @@ export function authComponentHOC<T>(Component: ComponentType<T>) {
         return <Component {...restProps as T}/>
     }
 
-    let redirectConnectComponent = connect(mapStateProps)(RedirectComponent)
-    return redirectConnectComponent
+    return compose<ComponentType>(connect(mapStateProps)(RedirectComponent))
+
 }

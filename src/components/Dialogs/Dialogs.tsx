@@ -3,6 +3,7 @@ import classes from './Dialogs.module.css'
 import {DialogsItem} from './DialogsItem/DialogsItem';
 import {Message} from "./DialogsMessage/Message";
 import {DialogsPropsType} from "./DialogsContainer";
+import {Redirect} from "react-router-dom";
 
 const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
