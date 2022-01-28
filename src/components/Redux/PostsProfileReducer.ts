@@ -125,7 +125,7 @@ export const setUsers = (profile: any) => {
 }
 
 export const getPostProfile = (userId: number) => (dispatch: Dispatch) => {
-    dispatch(setUsers(userId))
+    //dispatch(setUsers(userId))
     usersAPI.getProfile(userId).then((response) => {
         console.log(response.data, "profile")
         dispatch(setUsers(response.data))

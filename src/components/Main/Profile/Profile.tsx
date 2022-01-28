@@ -13,11 +13,13 @@ export const Profile: React.FC<any> = (props) => {
 
     const state = useSelector<AppStateType, PostProfileType>(state => state.profilePage)
     const stateIsAuth = useSelector<AppStateType, AuthUsersType>(state => state.authUser.isAuth)
+    const id = useSelector<AppStateType>(state => state.authUser.id)
     const dispatch = useDispatch();
+
     const {users} = useParams<any>()
 
     useEffect(() => {
-        dispatch(getPostProfile(users))
+        dispatch(getPostProfile(users || id))
     }, [users])
 
     const addPost = () => {
@@ -28,11 +30,15 @@ export const Profile: React.FC<any> = (props) => {
     const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         props.onChangePost(e.currentTarget.value)
     }
-    // if (!state.profile) {
-    //     return <div>...loading</div>
-    // }
-    authComponentHOC(Profile)
-    // if (!stateIsAuth) return <Redirect to={'/login'} />
+
+    if (!state.profile) {
+        return <div>...loading</div>
+    }
+
+    //authComponentHOC(Profile)
+
+    //if (!stateIsAuth) return <Redirect to={'/login'} />
+    console.log(state)
     return (
         <div>
             <div className={classes.infoBlock}>
@@ -43,8 +49,8 @@ export const Profile: React.FC<any> = (props) => {
             </div>
 
             <div>
-                <ProfileStatus />
-                <div>{state.profile.fullName ? state.profile.fullName : ''}</div>
+                <ProfileStatus status={'hello status'}/>
+                <div>{state.profile?.fullName ? state.profile?.fullName : ''}</div>
                 <div>
                     <textarea value={state.newPostMessage} onChange={onChange} name="textPost"/>
                     <button onClick={addPost}>опубликовать</button>

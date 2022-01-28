@@ -6,22 +6,10 @@ export class UsersAPIComponent extends React.Component<UsersPropsType> {
 
     componentDidMount() {
         this.props.getUsersTC(this.props.firstCount, this.props.pageSize)
-
-        // usersAPI.getUsers(this.props.firstCount, this.props.pageSize).then(data =>
-        //     this.props.setUsers(data.items)
-        // )
     }
 
     firstCountHandler = (pageNumber: number) => {
         this.props.getUsersTC(pageNumber, this.props.pageSize)
-        // this.props.isLoader(true)
-        // this.props.setCurrentUsers(pageNumber)
-        //
-        // usersAPI.getUsers(pageNumber, this.props.pageSize)
-        //     .then((data) => {
-        //         this.props.setUsers(data.items)
-        //         this.props.isLoader(false)
-        //     });
     }
 
     render() {

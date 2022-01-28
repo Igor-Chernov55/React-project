@@ -1,18 +1,49 @@
 import React from "react";
 
+type PropsType = {
+    status: string
+}
 
-export class ProfileStatus extends React.Component{
+export class ProfileStatus extends React.Component<PropsType> {
+    state = {
+        editMode: false,
+        title: 'yo'
+    }
 
-     state = {
+    editModeActivated() {
+        this.setState({
+            editMode: true
+        })
+    }
 
-        editMode: false
+    editModeDiactivated() {
+        this.setState({
+            editMode: false
+        })
     }
 
     render() {
-        return <div>
-            <span>{this.state.editMode  }</span>
-            {/*<textarea value={this.props.status}></textarea>*/}
-            </div>
+        return (
+            <>
+                {this.state.editMode ?
+                    <div>
+                        <textarea
+                            autoFocus={true}
+                            onBlur={this.editModeDiactivated.bind(this)}
+                            value={this.props.status}>
+
+                        </textarea>
+                    </div>
+                    :
+                    <div>
+                        <span
+                            onDoubleClick={this.editModeActivated.bind(this)}>
+                            {this.props.status}
+                        </span>
+                    </div>
+                }
+            </>
+        )
     }
 
 }
