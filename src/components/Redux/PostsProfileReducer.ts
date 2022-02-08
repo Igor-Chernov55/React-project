@@ -1,5 +1,5 @@
 import {Dispatch} from "redux";
-import {profileAPI, usersAPI} from "../API/UserAPI";
+import {profileAPI, usersAPI} from "../API/API";
 
 export type MessageType = {
     id: number
@@ -50,11 +50,8 @@ const initialState: PostProfileType = {
         }
         ,
     },
-    status: {
-        resultCode: 0,
-        messages: [''],
-        data: {}
-    }
+    status: '',
+    updateStatus: ''
 }
 
 export type PostProfileType = {
@@ -72,11 +69,8 @@ export type PostProfileType = {
             large: string | null
         }
     }
-    status: {
-        resultCode: number
-        messages: Array<string>
-        data: {}
-    }
+    status: string
+    updateStatus: string
 }
 
 export const postsProfileReducer = (state: PostProfileType = initialState, action: ActionsPostsReducerType): PostProfileType => {
@@ -89,7 +83,6 @@ export const postsProfileReducer = (state: PostProfileType = initialState, actio
                 img: 'https://avavatar.ru/images/avatars/1/avatar_jV2wd3K7Xo6YegC2.jpg',
                 likes: 2,
             }
-
             stateCopy.posts.push(newPost)
             stateCopy.newPostMessage = ''
             return stateCopy
@@ -104,6 +97,10 @@ export const postsProfileReducer = (state: PostProfileType = initialState, actio
         case 'SET-STATUS':
             return {...state, status: action.status}
 
+        case "UPDATE-STATUS":
+            console.log('update')
+            return {...state, updateStatus: action.updateStatus}
+
         default:
             return stateCopy
     }
@@ -114,6 +111,7 @@ export type ActionsPostsReducerType =
     | ReturnType<typeof addPostAC>
     | ReturnType<typeof setUsers>
     | ReturnType<typeof setStatus>
+    | ReturnType<typeof updateStatus>
 
 export const addPostAC = () => {
     return {
@@ -135,11 +133,18 @@ export const setUsers = (profile: any) => {
     } as const
 }
 
-export const setStatus = (status: any) => {
+export const setStatus = (status: string) => {
     return {
         type: 'SET-STATUS',
         status
-    }as const
+    } as const
+}
+
+export const updateStatus = (updateStatus: string) => {
+    return {
+        type: 'UPDATE-STATUS',
+        updateStatus
+    } as const
 }
 
 export const getPostProfile = (userId: number) => (dispatch: Dispatch) => {
@@ -149,9 +154,18 @@ export const getPostProfile = (userId: number) => (dispatch: Dispatch) => {
     })
 }
 
-export const getStatus = (status: any) => (dispatch: Dispatch) => {
-    profileAPI.getStatus(status)
+export const getStatus = (userID: number) => (dispatch: Dispatch) => {
+    profileAPI.getStatus(userID)
         .then(res => {
             dispatch(setStatus(res.data))
+
         })
+}
+
+export const updateStatusProfile = (status: string) => async (dispatch: Dispatch) => {
+
+    const response = await profileAPI.updateStatus(status)
+    if(response.data.resultCode === 0){
+        dispatch(updateStatus(status))
+    }
 }
