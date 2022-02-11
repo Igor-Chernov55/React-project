@@ -1,7 +1,7 @@
 import React from "react";
 import {compose} from 'redux';
 import {connect} from 'react-redux';
-import {PostProfileType, updateStatus} from "../../Redux/PostsProfileReducer";
+import {updateStatus} from "../../Redux/PostsProfileReducer";
 import {AppStateType} from "../../Redux/redux-store";
 
 type PropsType = {
@@ -38,11 +38,11 @@ export class ProfileStatus extends React.Component<PropsType> {
         )
     }
 
-    // componentDidUpdate(prevProps: Readonly<PropsType>, prevState: Readonly<{}>, snapshot?: any) {
-    //     if(prevProps.status !== this.props.status){
-    //         this.setState({status: this.props.status})
-    //     }
-    // }
+    componentDidUpdate(prevProps: Readonly<PropsType>, prevState: Readonly<{}>, snapshot?: any) {
+        if(prevProps.status !== this.props.status){
+            this.setState({status: this.props.status})
+        }
+    }
 
     render() {
 
